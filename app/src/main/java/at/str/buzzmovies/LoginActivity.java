@@ -199,11 +199,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
+        //return email.equals("user");
         return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
+        //return password.equals("pass");
         return password.length() > 4;
     }
 
@@ -314,7 +316,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-
+/*
             try {
                 // Simulate network access.
                 Thread.sleep(2000);
@@ -330,8 +332,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 }
             }
 
-            // TODO: register the new account here.
-            return true;
+  */          // TODO: register the new account here.
+
+            //This is our current hard coded login
+            if (mEmail.equals("user@example.com") && mPassword.equals("pass")) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
         @Override

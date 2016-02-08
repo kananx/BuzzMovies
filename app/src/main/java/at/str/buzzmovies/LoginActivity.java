@@ -96,8 +96,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mcancelLoginButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
-                System.exit(0);
+                mPasswordView.setText("");
+                mEmailView.setText("");
+
             }
         });
     }

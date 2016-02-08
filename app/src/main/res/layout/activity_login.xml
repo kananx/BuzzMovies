@@ -84,7 +84,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancel"
+        android:text="@string/cancel_button_text"
         android:id="@+id/cancel_login_button"
         android:layout_gravity="center_horizontal"
         android:clickable="false" />

@@ -9,7 +9,8 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="at.str.buzzmovies.LoginActivity"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:clickable="false">
 
     <!-- Login progress -->
     <ProgressBar
@@ -79,4 +80,12 @@
         android:text="@string/action_sign_in"
         android:textStyle="bold"
         android:layout_gravity="center_horizontal" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:id="@+id/cancel_login_button"
+        android:layout_gravity="center_horizontal"
+        android:clickable="false" />
 </LinearLayout>

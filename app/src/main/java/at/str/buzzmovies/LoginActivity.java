@@ -256,12 +256,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask.execute((Void) null);
         }
     }
+
+    /**
+     * Checks if the email has an @ sign
+     * @param email The input email address from the text field
+     * @return True/False if the email is valid
+     */
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
         //return email.equals("user");
         return email.contains("@");
     }
 
+    /**
+     * Check if the password satisfies our requirements (currently length > 3)
+     * @param password The password input into the field
+     * @return True/False whether or not the password is valid
+     */
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         //return password.equals("pass");

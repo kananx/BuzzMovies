@@ -30,6 +30,11 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.io.BufferedInputStream;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import android.content.Intent;
@@ -77,8 +82,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    //attemptLogin();
-                    attemptHardLogin();
+                    attemptLogin();
+                    //attemptHardLogin();
                     return true;
                 }
                 return false;
@@ -89,8 +94,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                //attemptLogin();
-                attemptHardLogin();
+                attemptLogin();
+                //attemptHardLogin();
             }
         });
 
@@ -370,7 +375,20 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-/*
+            InputStream in = null;
+
+
+            try {
+                //TODO: Add urlString to xml
+                URL url = new URL(urlString);
+
+                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+
+                in = new BufferedInputStream(urlConnection.getInputStream());
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
             try {
                 // Simulate network access.
                 Thread.sleep(2000);
@@ -385,15 +403,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                     return pieces[1].equals(mPassword);
                 }
             }
-
-  */          // TODO: register the new account here.
-
+            // TODO: register the new account here.
+/*
             //This is our current hard coded login
             if (mEmail.equals("user@example.com") && mPassword.equals("pass")) {
                 return true;
             } else {
                 return false;
-            }
+            }*/
+            return false;
         }
 
         @Override
@@ -402,7 +420,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(false);
 
             if (success) {
-                finish();
+                //finish();
+                Intent i = new Intent(LoginActivity.this, HomeActivity.class);
+                startActivity(i);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

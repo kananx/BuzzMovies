@@ -16,4 +16,5 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name ="cancel_button_text">Cancel</string>
     <string name ="logout_button_text">Logout</string>
+    <string name="urlString">//EnterURLHere</string>
 </resources>

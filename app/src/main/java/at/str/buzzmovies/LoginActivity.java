@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -33,10 +34,14 @@ import android.widget.TextView;
 
 import java.io.BufferedInputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import android.content.Intent;
 
 import static android.Manifest.permission.READ_CONTACTS;
@@ -407,13 +412,31 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             InputStream in = null;
 
 
+
             try {
                 //TODO: Add urlString to xml
+                String urlString = Resources.getSystem().getString(R.string.urlString);
                 URL url = new URL(urlString);
 
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+                HttpURLConnection http = (HttpURLConnection) url.openConnection();
+                http.setRequestMethod("POST"); //This is making it so I do the post method
+                http.setDoOutput(true); //I don't know what this does
 
-                in = new BufferedInputStream(urlConnection.getInputStream());
+                //TODO: Format the username and password correctly
+                //Sending with json
+                String userPass = mEmail + ":" + mPassword;
+                byte[] out = userPass.getBytes();
+                int length = out.length;
+                http.setFixedLengthStreamingMode(length);
+                http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset = URF-8");
+                http.connect();
+                OutputStream os = http.getOutputStream();
+                os.write(out);
+
+
+
+
+                in = new BufferedInputStream(http.getInputStream());
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 return false;

@@ -4,10 +4,10 @@ package at.str.buzzmovies;
  * An abstract Account class used for creating users and admins.
  */
 public abstract class Account {
-    private String email;
-    private String password;
-    private String status;
-    private String name;
+    protected String email;
+    protected String password;
+    protected String status;
+    protected String name;
 
     /**
      * Constructor for a new account.

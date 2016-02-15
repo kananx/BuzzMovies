@@ -32,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        //When logout button is clicked, logout  
+        //When logout button is clicked, logout of user profile and go to loginActivity
         Button mLogoutButton = (Button) findViewById(R.id.logout_button);
         mLogoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
-     *
+     * Directs app to the LoginActivity page
      */
     private void logout() {
         Intent toLoginActivity = new Intent(this, LoginActivity.class);

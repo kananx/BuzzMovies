@@ -85,6 +85,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
         });
 
+
         Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -104,6 +105,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 mPasswordView.setText("");
                 mEmailView.setText("");
 
+            }
+        });
+
+
+        Button mRegisterButton = (Button) findViewById(R.id.register_button);
+        mRegisterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toRegister();
             }
         });
     }
@@ -187,8 +197,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // perform the user login attempt.
             //showProgress(true);
             if (email.equals("user@example.com") && password.equals("pass")) {
-                Intent toHomeActivity = new Intent(this, HomeActivity.class);
-                startActivity(toHomeActivity);
+                toHome();
 
             } else {
                 Context context = getApplicationContext();
@@ -199,6 +208,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             }
 
 
+    }
+    private void toHome() {
+        Intent toHomeActivity = new Intent(this, HomeActivity.class);
+        startActivity(toHomeActivity);
+    }
+
+    private void toRegister() {
+        Intent toRegiserActivity = new Intent(this, RegistrationScreen.class);
+        startActivity(toRegiserActivity);
     }
     /**
      * Attempts to sign in or register the account specified by the login form.

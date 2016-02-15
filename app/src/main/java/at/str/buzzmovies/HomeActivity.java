@@ -9,6 +9,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * Home activity page that allows the user to interact with available movies.
+ * @author Delicious 3.14
+ * @verion 1.0
+ * @since 02-13-2016
+ */
 public class HomeActivity extends AppCompatActivity {
 
     @Override
@@ -26,7 +32,7 @@ public class HomeActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
+        //When logout button is clicked, logout of user profile and go to loginActivity
         Button mLogoutButton = (Button) findViewById(R.id.logout_button);
         mLogoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,6 +42,9 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * Directs app to the LoginActivity page
+     */
     private void logout() {
         Intent toLoginActivity = new Intent(this, LoginActivity.class);
         startActivity(toLoginActivity);

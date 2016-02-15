@@ -46,7 +46,7 @@ public class RegistrationScreen extends AppCompatActivity {
      * Directs the App back to the home activity page
      */
     private void register() {
-        Intent toHomeActivity = new Intent(this, HomeActivity.class);
-        startActivity(toHomeActivity);
+        Intent toProfileActivity = new Intent(this, ProfileActivity.class);
+        startActivity(toProfileActivity);
     }
 }

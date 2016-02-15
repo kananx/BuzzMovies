@@ -423,12 +423,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 http.setDoOutput(true); //I don't know what this does
 
                 //TODO: Format the username and password correctly
-                //Sending with json
-                String userPass = mEmail + ":" + mPassword;
-                byte[] out = userPass.getBytes();
-                int length = out.length;
+
                 http.setFixedLengthStreamingMode(length);
-                http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset = URF-8");
+                http.setRequestProperty("Content-Type", "application/x-www-form-urlencoded; charset = UTF-8");
                 http.connect();
                 OutputStream os = http.getOutputStream();
                 os.write(out);

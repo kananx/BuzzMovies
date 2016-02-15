@@ -38,15 +38,15 @@ public class RegistrationScreen extends AppCompatActivity {
      * Directs the app back to the LoginActivity page
      */
     private void cancel() {
-        Intent toLoginActivity = new Intent(this, LoginActivity.class);
+        Intent toLoginActivity = new Intent(this, LoginAct
+    private void register() {
+        Intent toHomeActivity = new Intent(this, HomeActivity.class);
+        startActivity(toHomeActivity);ivity.class);
         startActivity(toLoginActivity);
     }
 
     /**
      * Directs the App back to the home activity page
      */
-    private void register() {
-        Intent toHomeActivity = new Intent(this, HomeActivity.class);
-        startActivity(toHomeActivity);
     }
 }

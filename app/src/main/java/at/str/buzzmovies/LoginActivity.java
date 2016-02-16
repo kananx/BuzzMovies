@@ -38,9 +38,12 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import android.content.Intent;
 
@@ -87,8 +90,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == R.id.login || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    //attemptHardLogin();
+                    //attemptLogin();
+                    attemptHardLogin();
                     return true;
                 }
                 return false;
@@ -100,8 +103,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                attemptLogin();
-                //attemptHardLogin();
+                //attemptLogin();
+                attemptHardLogin();
             }
         });
 
@@ -176,7 +179,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         String email = mEmailView.getText().toString();
         String password = mPasswordView.getText().toString();
 
-/*
+
         boolean cancel = false;
         View focusView = null;
 
@@ -202,10 +205,29 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // There was an error; don't attempt login and focus the first
             // form field with an error.
             focusView.requestFocus();
-        } else {*/
+        } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             //showProgress(true);
+            Set<String> emailsDB = ((ImportantData) this.getApplication()).getEmails();
+            if (emailsDB.contains(email)) {
+                //Collection<User> usersDB = ((ImportantData) this.getApplication()).getUsers();
+                HashMap<String, User> DB = ((ImportantData) this.getApplication()).getDB();
+                User user = DB.get(email);
+                String passToCheck = user.getPassword();
+                if (passToCheck.equals(password)) {
+                    ((ImportantData) this.getApplication()).setCurrentUser(user);
+                    toHome();
+                }
+            } else {
+                Context context = getApplicationContext();
+                CharSequence text = "Login Incorrect";
+                int duration = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
+            }
+        }
+        /*
             if (email.equals("user@example.com") && password.equals("pass")) {
                 toHome();
 
@@ -215,7 +237,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 int duration = Toast.LENGTH_SHORT;
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
-            }
+            }*/
 
 
     }
@@ -412,7 +434,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             InputStream in = null;
 
 
-
+/*
             try {
                 //TODO: Add urlString to xml
                 String urlString = Resources.getSystem().getString(R.string.urlString);
@@ -437,7 +459,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             } catch (Exception e) {
                 System.out.println(e.getMessage());
                 return false;
-            }
+            }*/
             try {
                 // Simulate network access.
                 Thread.sleep(2000);

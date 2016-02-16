@@ -20,6 +20,7 @@
     <string name="cancel_button_text">Cancel</string>
     <string name="logout_button_text">Logout</string>
     <string name="title_activity_profile">ProfileActivity</string>
+    <string name="profile_button">Profile</string>
 
     <!-- Strings related to Profile Page -->
     <string name="email_profile_page">Email will go here</string>

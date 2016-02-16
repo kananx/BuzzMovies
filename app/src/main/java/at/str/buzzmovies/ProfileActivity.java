@@ -17,7 +17,16 @@ import android.widget.TextView;
  * @author Delicous 3.14
  */
 public class ProfileActivity extends AppCompatActivity {
-
+    private User user;
+    private String name;
+    private String interestStr;
+    private String major;
+    private String email;
+    private TextView mEmail;
+    private EditText nameText;
+    private TextView majorPromp;
+    private EditText majorText;
+    private EditText interests;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,25 +43,32 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        TextView email = (TextView) findViewById(R.id.email_textView);
-        //have email load from user array
-        EditText nameText = (EditText) findViewById(R.id.name_editText);
-        //retrieving name, might use in user.java
-        String name = nameText.getText().toString();
+        user = ((ImportantData) this.getApplication()).getCurrentUser();
 
-        TextView majorPromp = (TextView) findViewById(R.id.major_TextView);
-        EditText majorText = (EditText) findViewById(R.id.major_editText);
-        //retreiving major
-        String major = majorText.getText().toString();
-        EditText interests = (EditText) findViewById(R.id.interests_editText);
-        //retrieving interest
-        String interestStr = interests.getText().toString();
+        mEmail = (TextView) findViewById(R.id.email_textView);
+        mEmail.setText(user.getEmail());
+        email = mEmail.getText().toString();
+        nameText = (EditText) findViewById(R.id.name_editText);
+        majorPromp = (TextView) findViewById(R.id.major_TextView);
+        majorText = (EditText) findViewById(R.id.major_editText);
+        interests = (EditText) findViewById(R.id.interests_editText);
 
+        majorText.setText(user.getMajor());
+        interests.setText(user.getInterest());
+        nameText.setText(user.getName());
 
         Button mHomeButton = (Button) findViewById(R.id.home_button);
         mHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Set all of the fields in user
+                //retrieving name, might use in user.java
+                name = nameText.getText().toString();
+                //retreiving major
+                major = majorText.getText().toString();
+                //retrieving interest
+                interestStr = interests.getText().toString();
+                changeInformation();
                 toHome();
             }
         });
@@ -60,9 +76,16 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    private void changeInformation() {
+        user.setInterest(interestStr);
+        user.setMajor(major);
+        user.setName(name);
+        ((ImportantData) this.getApplication()).addUser(user.getEmail(), user);
+        ((ImportantData) this.getApplication()).setCurrentUser(user);
+    }
+
     private void toHome() {
         Intent toHomeActivity = new Intent(this, HomeActivity.class);
         startActivity(toHomeActivity);
-
     }
 }

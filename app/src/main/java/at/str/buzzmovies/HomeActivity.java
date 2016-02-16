@@ -40,6 +40,14 @@ public class HomeActivity extends AppCompatActivity {
                 logout();
             }
         });
+
+        Button mProfileButton = (Button) findViewById(R.id.profile_button);
+        mProfileButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                profile();
+            }
+        });
     }
 
     /**
@@ -48,6 +56,11 @@ public class HomeActivity extends AppCompatActivity {
     private void logout() {
         Intent toLoginActivity = new Intent(this, LoginActivity.class);
         startActivity(toLoginActivity);
+    }
+
+    private void profile() {
+        Intent toProfileActivity = new Intent(this, ProfileActivity.class);
+        startActivity(toProfileActivity);
     }
 
 }

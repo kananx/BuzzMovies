@@ -16,7 +16,14 @@
         completions."
     </string>
     <string name="title_activity_home">HomeActivity</string>
-    <string name ="cancel_button_text">Cancel</string>
-    <string name ="logout_button_text">Logout</string>
     <string name="urlString">buzzmovies.str.at/api/user/login</string>
+    <string name="cancel_button_text">Cancel</string>
+    <string name="logout_button_text">Logout</string>
+    <string name="title_activity_profile">ProfileActivity</string>
+
+    <!-- Strings related to Profile Page -->
+    <string name="email_profile_page">Email will go here</string>
+    <string name="major_profile_page">Major</string>
+    <string name="interests">Movie Interests</string>
+    <string name="return_button">Save</string>
 </resources>

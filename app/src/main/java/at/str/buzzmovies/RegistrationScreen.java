@@ -65,6 +65,5 @@ public class RegistrationScreen extends AppCompatActivity {
             Intent toHomeActivity = new Intent(this, HomeActivity.class);
             startActivity(toHomeActivity);
         }
-
     }
 }

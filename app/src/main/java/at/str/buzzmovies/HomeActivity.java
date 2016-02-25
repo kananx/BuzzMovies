@@ -51,13 +51,16 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     /**
-     * Directs app to the LoginActivity page
+     * Directs app to the LoginActivity page.
      */
     private void logout() {
         Intent toLoginActivity = new Intent(this, LoginActivity.class);
         startActivity(toLoginActivity);
     }
 
+    /**
+     * Directs app to the ProfileActivity page.
+     */
     private void profile() {
         Intent toProfileActivity = new Intent(this, ProfileActivity.class);
         startActivity(toProfileActivity);

@@ -63,11 +63,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
      */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
+    private static final String[] DUMMY_CREDENTIALS = new String[] {
             "foo@example.com:hello", "bar@example.com:world"
     };
+
     /**
-     * Keep track of the login task to ensure we can cancel it if requested.
+     * Keeps track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
 
@@ -131,14 +132,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         });
     }
 
+    /**
+     * Populates the auto complete if contact requesting is allowed.
+     */
     private void populateAutoComplete() {
-        if (!mayRequestContacts()) {
-            return;
+        if (mayRequestContacts()) {
+            getLoaderManager().initLoader(0, null, this);
         }
-
-        getLoaderManager().initLoader(0, null, this);
     }
 
+    /**
+     * Confirms permission for the app to request contacts.
+     * @return true if allowed, false otherwise
+     */
     private boolean mayRequestContacts() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             return true;
@@ -174,6 +180,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         }
     }
 
+    /**
+     * Attempts a hard login.
+     */
     private void attemptHardLogin() {
         // Store values at the time of the login attempt.
         String email = mEmailView.getText().toString();
@@ -241,15 +250,23 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
 
     }
+
+    /**
+     * Sends the app to the HomeActivity.
+     */
     private void toHome() {
         Intent toHomeActivity = new Intent(this, HomeActivity.class);
         startActivity(toHomeActivity);
     }
 
+    /**
+     * Sends the app to the RegiserActivity.
+     */
     private void toRegister() {
         Intent toRegiserActivity = new Intent(this, RegistrationScreen.class);
         startActivity(toRegiserActivity);
     }
+
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
@@ -303,7 +320,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
     /**
-     * Checks if the email has an @ sign
+     * Checks if the email has an @ sign.
      * @param email The input email address from the text field
      * @return True/False if the email is valid
      */
@@ -394,6 +411,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
     }
 
+    /**
+     * Interface for the profile query.
+     */
     private interface ProfileQuery {
         String[] PROJECTION = {
                 ContactsContract.CommonDataKinds.Email.ADDRESS,
@@ -405,8 +425,12 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     }
 
 
+    /**
+     * Creates an adapter to tell the AutoCompleteTextView
+     * what to show in its dropdown list.
+     * @param emailAddressCollection the list of email
+     */
     private void addEmailsToAutoComplete(List<String> emailAddressCollection) {
-        //Create adapter to tell the AutoCompleteTextView what to show in its dropdown list.
         ArrayAdapter<String> adapter =
                 new ArrayAdapter<>(LoginActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
@@ -423,6 +447,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         private final String mEmail;
         private final String mPassword;
 
+        /**
+         * Attemps a login with the given credentials.
+         * @param email the given email
+         * @param password the given password
+         */
         UserLoginTask(String email, String password) {
             mEmail = email;
             mPassword = password;

@@ -9,6 +9,12 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
+import java.io.IOException;
+
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 /**
  * Home activity page that allows the user to interact with available movies.
  * @author Delicious 3.14
@@ -48,7 +54,9 @@ public class HomeActivity extends AppCompatActivity {
                 profile();
             }
         });
+
     }
+
 
     /**
      * Directs app to the LoginActivity page.
@@ -65,5 +73,8 @@ public class HomeActivity extends AppCompatActivity {
         Intent toProfileActivity = new Intent(this, ProfileActivity.class);
         startActivity(toProfileActivity);
     }
+
+    
+
 
 }

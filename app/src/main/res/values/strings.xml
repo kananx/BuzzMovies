@@ -27,4 +27,10 @@
     <string name="major_profile_page">Major</string>
     <string name="interests">Movie Interests</string>
     <string name="return_button">Save</string>
+
+    <!-- Sting for search bar -->
+    <string name="search_title">Search</string>
+    <string name="search_hint">Find Movies</string>
+    <string name="title_activity_search_results">SearchResultsActivity</string>
+
 </resources>

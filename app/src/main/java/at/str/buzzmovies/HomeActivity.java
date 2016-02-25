@@ -6,11 +6,11 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuInflater;
 import android.view.View;
-import android.widget.Button;
-import android.app.ActionBar;
 import android.view.Menu;
+import android.view.MenuItem;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.widget.SearchView;
 
 /**
  * Home activity page that allows the user to interact with available movies.
@@ -39,31 +39,32 @@ public class HomeActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        //When logout button is clicked, logout of user profile and go to loginActivity
-        Button mLogoutButton = (Button) findViewById(R.id.logout_button);
-        mLogoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                logout();
-            }
-        });
-
-        Button mProfileButton = (Button) findViewById(R.id.profile_button);
-        mProfileButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                profile();
-            }
-        });
-
-
 
 
     }
 
-    public boolean onCreateOptionsMenu(Menu overflow) {
-        getMenuInflater().inflate(R.menu.overflow, overflow);
+    @Override
+    public boolean onCreateOptionsMenu(Menu optionMenu) {
+        getMenuInflater().inflate(R.menu.options_menu, optionMenu);
+        // Associate searchable configuration with the SearchView"
+        MenuItem searchItem = optionMenu.findItem(R.id.search);
+        SearchView mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.overflow_logout:
+                logout();
+                return true;
+            case R.id.overflow_profile:
+                profile();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 
     /**

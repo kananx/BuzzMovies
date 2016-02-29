@@ -12,6 +12,7 @@ public class ImportantData extends Application {
     private HashMap<String, User> USERDATABASE = new HashMap<>();
 
     private User currentUser = null;
+    public String results = null;
 
     /**
      * Returns the current user.

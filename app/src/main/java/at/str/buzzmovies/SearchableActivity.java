@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
+import okhttp3.Call;
+import okhttp3.Callback;
 import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -24,13 +26,20 @@ public class SearchableActivity extends AppCompatActivity {
 
     private static final String TAG = SearchableActivity.class.getSimpleName();
     private OkHttpClient client = new OkHttpClient();
+    private TextView msearchResults;
+    private String resultsStr = "Tiera";
+    final String[] responseString = new String[1];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.search);
+        setContentView(R.layout.activity_search_results);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        msearchResults = (TextView) findViewById(R.id.resultTextView2);
+
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -54,40 +63,57 @@ public class SearchableActivity extends AppCompatActivity {
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            String results = doSearchQuery(query);
-            String[] resultArr = new String
+            doSearchQuery(query);
+            //msearchResults.setText(resultsStr);
+            msearchResults.setText(responseString[0]);
 
 
         }
     }
 
-    public String doSearchQuery(String query) {
+    public void doSearchQuery(String query) {
         String url = "http://omdbapi.com/?t=" + query;
-        String results = null;
+        String results = "doSearchQuery";
         try {
-            results = run(url);
+            run(url);
         } catch (Exception e) {
             e.printStackTrace();
+            results = e.toString();
         }
-        return results;
+        //return results;
 
 
 
     }
 
-    public String run(String url) throws Exception {
+    public void run(String url) throws Exception {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
 
-        Response response = client.newCall(request).execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
 
-        Headers responseHeaders = response.headers();
-        for (int i = 0; i < responseHeaders.size(); i++) {
-            System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
-        }
+            }
 
-       return  response.body().string();
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                //Response response = client.newCall(request).execute();
+                if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+
+                Headers responseHeaders = response.headers();
+                for (int i = 0; i < responseHeaders.size(); i++) {
+                    System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
+                }
+                resultsStr = response.body().string();
+                responseString[0] = response.body().string();
+
+            }
+        });
+
+
+        //msearchResults.setText(response.body().string());
     }
 }

@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.content.Intent;
 import android.app.SearchManager;
+import android.widget.TextView;
 
 import static android.support.v4.media.session.MediaButtonReceiver.handleIntent;
 
@@ -30,6 +31,10 @@ public class SearchResultsActivity extends AppCompatActivity {
         });
 
         handleIntent(getIntent());
+
+
+
+
     }
 
     @Override

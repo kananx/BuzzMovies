@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.content.Intent;
 import android.app.SearchManager;
+import android.widget.TextView;
 
 import java.io.IOException;
 
@@ -47,26 +48,33 @@ public class SearchableActivity extends AppCompatActivity {
         Log.i(TAG, "in onNewIntent");
         setIntent(intent);
         handleIntent(intent);
-        //also handle ACTION_SEARCH here
     }
 
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            //use the query to search your data somehow
-            //doSearchQuery (or doMySearch) is the actual search logic
             doSearchQuery(query);
+
         }
     }
 
     public void doSearchQuery(String query) {
         String url = "http://omdbapi.com/?t=" + query;
-        run(url);
+        String results = run(url);
+
+        TextView test = (TextView) findViewById(R.id.testtextview);
+        test.setText(results);
+
     }
 
-    String run(String url) {
+    private String run(String url) {
         Request request = new Request.Builder().url(url).build();
-        Response response = client.newCall(request).execute();
-        return response.body().string();
+        try {
+            Response response = client.newCall(request).execute();
+            return response.body().string();
+        }
+        catch (IOException e) {
+            return "";
+        }
     }
 }

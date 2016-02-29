@@ -10,13 +10,18 @@ import android.view.View;
 import android.content.Intent;
 import android.app.SearchManager;
 
+import java.io.IOException;
+
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import static android.support.v4.media.session.MediaButtonReceiver.handleIntent;
 
 public class SearchableActivity extends AppCompatActivity {
 
     private static final String TAG = SearchableActivity.class.getSimpleName();
+    private OkHttpClient client = new OkHttpClient();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +60,13 @@ public class SearchableActivity extends AppCompatActivity {
     }
 
     public void doSearchQuery(String query) {
-        OkHttpClient client = new OkHttpClient();
-
+        String url = "http://omdbapi.com/?t=" + query;
+        run(url);
     }
 
-
+    String run(String url) {
+        Request request = new Request.Builder().url(url).build();
+        Response response = client.newCall(request).execute();
+        return response.body().string();
+    }
 }

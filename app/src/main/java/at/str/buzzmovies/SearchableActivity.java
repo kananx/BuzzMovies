@@ -5,13 +5,18 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.content.Intent;
 import android.app.SearchManager;
 
+import okhttp3.OkHttpClient;
+
 import static android.support.v4.media.session.MediaButtonReceiver.handleIntent;
 
 public class SearchableActivity extends AppCompatActivity {
+
+    private static final String TAG = SearchableActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +39,24 @@ public class SearchableActivity extends AppCompatActivity {
 
     @Override
     protected void onNewIntent(Intent intent) {
+        Log.i(TAG, "in onNewIntent");
+        setIntent(intent);
         handleIntent(intent);
         //also handle ACTION_SEARCH here
     }
 
     private void handleIntent(Intent intent) {
-
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             //use the query to search your data somehow
+            //doSearchQuery (or doMySearch) is the actual search logic
+            doSearchQuery(query);
         }
+    }
+
+    public void doSearchQuery(String query) {
+        OkHttpClient client = new OkHttpClient();
+
     }
 
 

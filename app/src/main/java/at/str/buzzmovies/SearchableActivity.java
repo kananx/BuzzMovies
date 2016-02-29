@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
+import okhttp3.Headers;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -27,7 +28,7 @@ public class SearchableActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_results);
+        setContentView(R.layout.search);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -53,28 +54,40 @@ public class SearchableActivity extends AppCompatActivity {
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            doSearchQuery(query);
+            String results = doSearchQuery(query);
+            String[] resultArr = new String
+
 
         }
     }
 
-    public void doSearchQuery(String query) {
+    public String doSearchQuery(String query) {
         String url = "http://omdbapi.com/?t=" + query;
-        String results = run(url);
+        String results = null;
+        try {
+            results = run(url);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return results;
 
-        TextView test = (TextView) findViewById(R.id.testtextview);
-        test.setText(results);
+
 
     }
 
-    private String run(String url) {
-        Request request = new Request.Builder().url(url).build();
-        try {
-            Response response = client.newCall(request).execute();
-            return response.body().string();
+    public String run(String url) throws Exception {
+        Request request = new Request.Builder()
+                .url(url)
+                .build();
+
+        Response response = client.newCall(request).execute();
+        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+
+        Headers responseHeaders = response.headers();
+        for (int i = 0; i < responseHeaders.size(); i++) {
+            System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
         }
-        catch (IOException e) {
-            return "";
-        }
+
+       return  response.body().string();
     }
 }

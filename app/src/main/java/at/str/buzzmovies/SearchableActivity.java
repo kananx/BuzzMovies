@@ -11,7 +11,11 @@ import android.content.Intent;
 import android.app.SearchManager;
 import android.widget.TextView;
 
+import com.android.volley.RequestQueue;
+import com.google.gson.Gson;
+
 import java.io.IOException;
+import java.util.Map;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -27,8 +31,10 @@ public class SearchableActivity extends AppCompatActivity {
     private static final String TAG = SearchableActivity.class.getSimpleName();
     private OkHttpClient client = new OkHttpClient();
     private TextView msearchResults;
-    private String resultsStr = "Tiera";
+    private static String content = "Tiera";
     final String[] responseString = new String[1];
+    private final Gson gson = new Gson();
+    private RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +70,8 @@ public class SearchableActivity extends AppCompatActivity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             doSearchQuery(query);
-            //msearchResults.setText(resultsStr);
-            msearchResults.setText(responseString[0]);
+            msearchResults.setText(content);
+            //msearchResults.setText(responseString[0]);
 
 
         }
@@ -90,30 +96,22 @@ public class SearchableActivity extends AppCompatActivity {
         Request request = new Request.Builder()
                 .url(url)
                 .build();
+        Response response = client.newCall(request).execute();
+        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
 
-        client.newCall(request).enqueue(new Callback() {
-            @Override
-            public void onFailure(Call call, IOException e) {
-                e.printStackTrace();
+        Gist gist = gson.fromJson(response.body().charStream(), Gist.class);
+        for (Map.Entry<String, GistFile> entry : gist.files.entrySet()) {
+            System.out.println(entry.getKey());
+            System.out.println(entry.getValue().content);
+        }
 
-            }
+    }
 
-            @Override
-            public void onResponse(Call call, Response response) throws IOException {
-                //Response response = client.newCall(request).execute();
-                if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+    static class Gist {
+        Map<String, GistFile> files;
+    }
 
-                Headers responseHeaders = response.headers();
-                for (int i = 0; i < responseHeaders.size(); i++) {
-                    System.out.println(responseHeaders.name(i) + ": " + responseHeaders.value(i));
-                }
-                resultsStr = response.body().string();
-                responseString[0] = response.body().string();
-
-            }
-        });
-
-
-        //msearchResults.setText(response.body().string());
+    static class GistFile {
+        String content;
     }
 }

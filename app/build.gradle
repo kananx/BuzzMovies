@@ -27,4 +27,8 @@ dependencies {
     compile 'com.squareup.okio:okio:1.6.0'
     compile files('libs/okhttp-3.1.2.jar')
     compile 'com.android.support:appcompat-v7:23.1.0'
+    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.android.volley:volley:1.0.0'
+
+
 }

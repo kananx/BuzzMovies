@@ -1,19 +1,21 @@
 package at.str.buzzmovies;
 
-public class Movie {
+import java.io.Serializable;
+
+public class Movie implements Serializable {
     private String title;
-    private String description;
+    private String plot;
     private String genre;
 
     /**
      * Constructor for a new movie.
      * @param title the movie's title
-     * @param description the movie's description
+     * @param plot the movie's description
      * @param genre the movie's genre
      */
-    public Movie(String title, String description, String genre) {
+    public Movie(String title, String plot, String genre) {
         this.title = title;
-        this.description = description;
+        this.plot = plot;
         this.genre = genre;
     }
 
@@ -30,7 +32,7 @@ public class Movie {
      * @return description
      */
     public String getDescription() {
-        return description;
+        return plot;
     }
 
     /**
@@ -46,7 +48,17 @@ public class Movie {
      * EMAIL (NAME), STATUS
      * @return movie info
      */
+
+
+
+    public void setTitle(String newTitle) {this.title = newTitle;}
+
+    public void setPlot(String newPlot) {this.plot = newPlot;}
+
+    public void setGenre(String newGenre) {this.genre = newGenre;}
+
+
     public String toString() {
-        return title + " [" + genre + "], " + description;
+        return title + " [" + genre + "], " + plot;
     }
 }

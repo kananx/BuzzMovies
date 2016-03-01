@@ -12,29 +12,37 @@ import android.app.SearchManager;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Headers;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
+
 
 import static android.support.v4.media.session.MediaButtonReceiver.handleIntent;
 
 public class SearchableActivity extends AppCompatActivity {
 
-    private static final String TAG = SearchableActivity.class.getSimpleName();
-    private OkHttpClient client = new OkHttpClient();
-    private TextView msearchResults;
-    private static String content = "Tiera";
-    final String[] responseString = new String[1];
-    private final Gson gson = new Gson();
+    //private static final String TAG = SearchableActivity.class.getSimpleName();
+//    private OkHttpClient client = new OkHttpClient();
+//    private TextView msearchResults;
+//    private static String content = "Tiera";
+//    final String[] responseString = new String[1];
+    //private final Gson gson = new Gson();
     private RequestQueue queue;
+    //Hold result from REST call
+    private String response;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +50,8 @@ public class SearchableActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_results);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        msearchResults = (TextView) findViewById(R.id.resultTextView2);
+        //msearchResults = (TextView) findViewById(R.id.resultTextView2);
+        queue = Volley.newRequestQueue(this);
 
 
 
@@ -61,7 +70,7 @@ public class SearchableActivity extends AppCompatActivity {
 
     @Override
     protected void onNewIntent(Intent intent) {
-        Log.i(TAG, "in onNewIntent");
+        //Log.i(TAG, "in onNewIntent");
         setIntent(intent);
         handleIntent(intent);
     }
@@ -70,48 +79,102 @@ public class SearchableActivity extends AppCompatActivity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             doSearchQuery(query);
-            msearchResults.setText(content);
+            //msearchResults.setText(content);
             //msearchResults.setText(responseString[0]);
 
 
         }
     }
 
+//    public void doSearchQuery(String query) {
+//        String url = "http://omdbapi.com/?t=" + query;
+//        //String results = "doSearchQuery";
+//        try {
+//            //run(url);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            results = e.toString();
+//        }
+//        //return results;
     public void doSearchQuery(String query) {
         String url = "http://omdbapi.com/?t=" + query;
-        String results = "doSearchQuery";
-        try {
-            run(url);
-        } catch (Exception e) {
-            e.printStackTrace();
-            results = e.toString();
+        /*
+            We expect to get back a JSON response.  Volley also has String responses.
+            This is an async call, but all the threading is handled for us in the background
+            We just need 2 callback functions.
+                onResponse = this is called when the response actually comes back from server
+                onError = this is called if there is any error in the response
+         */
+        JsonObjectRequest jsObjRequest = new JsonObjectRequest
+                (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject resp) {
+                        //handle a valid response coming back.  Getting this string mainly for debug
+                        response = resp.toString();
+                        //printing first 500 chars of the response.  Only want to do this for debug
+                        //TextView view = (TextView) findViewById(R.id.textView2);
+                        //view.setText(response.substring(0, 500));
+
+                        //Now we parse the information.  Looking at the format, everything encapsulated in RestResponse object
+                        JSONObject obj1 = null;
+                        /*try {
+                            obj1 = resp.getJSONObject();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        assert obj1 != null;
+                        //From that object, we extract the array of actual data labeled result
+                        JSONArray array = obj1.optJSONArray("result");
+
+                        for(int i=0; i < array.length(); i++) {
+*/
+                        ArrayList<Movie> movies = new ArrayList<>();
+                            try {
+                                //for each array element, we have to create an object
+
+                                JSONObject jsonObject = resp;
+                                Movie movie = new Movie(null,null,null);
+                                assert jsonObject != null;
+                                movie.setTitle(jsonObject.optString("Title"));
+                                movie.setPlot(jsonObject.optString("Plot"));
+                                movie.setGenre(jsonObject.optString("Genre"));
+                                //save the object for later
+                                movies.add(movie);
+
+
+                            }
+                            catch (Exception e) {
+                                Log.d("VolleyApp", "Failed to get JSON object");
+                                e.printStackTrace();
+                            }
+                        //}
+                        //once we have all data, then go to list screen
+                        toResults(movies);
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        response = "JSon Request Failed!!";
+                        //show error on phone
+                        //TextView view = (TextView) findViewById(R.id.textView2);
+                        //view.setText(response);
+                    }
+                });
+        //this actually queues up the async response with Volley
+        queue.add(jsObjRequest);
+    }
+        private void toResults(ArrayList<Movie> movies) {
+            Intent intent = new Intent(this, itemListActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("movie", movies);
+            intent.putExtras(bundle);
+            startActivity(intent);
+
         }
-        //return results;
 
 
 
-    }
-
-    public void run(String url) throws Exception {
-        Request request = new Request.Builder()
-                .url(url)
-                .build();
-        Response response = client.newCall(request).execute();
-        if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-
-        Gist gist = gson.fromJson(response.body().charStream(), Gist.class);
-        for (Map.Entry<String, GistFile> entry : gist.files.entrySet()) {
-            System.out.println(entry.getKey());
-            System.out.println(entry.getValue().content);
-        }
-
-    }
-
-    static class Gist {
-        Map<String, GistFile> files;
-    }
-
-    static class GistFile {
-        String content;
-    }
 }
+
+

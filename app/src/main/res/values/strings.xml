@@ -35,5 +35,6 @@
     <!-- String for search bar -->
     <string name="search_title">Search</string>
     <string name="title_activity_search_results">SearchResultsActivity</string>
+    <string name="title_activity_item_list">itemListActivity</string>
 
 </resources>

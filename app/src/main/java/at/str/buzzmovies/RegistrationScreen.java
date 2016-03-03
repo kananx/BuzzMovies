@@ -59,7 +59,7 @@ public class RegistrationScreen extends AppCompatActivity {
             toast.show();
         } else {
             User newUser = new User(email, password, "", "", "", "");
-            ((ImportantData) this.getApplication()).addUser(email, newUser);
+            //((ImportantData) this.getApplication()).addUser(email, newUser);
             ((ImportantData) this.getApplication()).setCurrentUser(newUser);
             User user = ((ImportantData) this.getApplication()).getCurrentUser();
             Intent toHomeActivity = new Intent(this, HomeActivity.class);

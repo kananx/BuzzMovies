@@ -9,7 +9,6 @@ import java.util.Set;
 
 public class ImportantData extends Application {
 
-    private HashMap<String, User> USERDATABASE = new HashMap<>();
 
     private User currentUser = null;
     public String results = null;
@@ -30,36 +29,5 @@ public class ImportantData extends Application {
         currentUser = user;
     }
 
-    /**
-     * Returns the USERDATABASE
-     * @return USERDATABASE
-     */
-    public HashMap<String, User> getDB() {
-        return USERDATABASE;
-    }
 
-    /**
-     * Returns the set of email addresses.
-     * @return the set of email addresses
-     */
-    public Set<String> getEmails() {
-        return USERDATABASE.keySet();
-    }
-
-    /**
-     * Returns the set of users.
-     * @return the set of users
-     */
-    public Collection<User> getUsers() {
-        return USERDATABASE.values();
-    }
-
-    /**
-     * Adds a user to the database.
-     * @param email the new user's email address
-     * @param user the new user
-     */
-    public void addUser(String email, User user) {
-        USERDATABASE.put(email, user);
-    }
 }

@@ -32,18 +32,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.io.BufferedInputStream;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
+
 
 import android.content.Intent;
 
@@ -218,46 +210,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             //showProgress(true);
-            Set<String> emailsDB = ((ImportantData) this.getApplication()).getEmails();
-            if (emailsDB.contains(email)) {
-                //Collection<User> usersDB = ((ImportantData) this.getApplication()).getUsers();
-                HashMap<String, User> DB = ((ImportantData) this.getApplication()).getDB();
-                User user = DB.get(email);
-                String passToCheck = user.getPassword();
-                if (passToCheck.equals(password)) {
-                    ((ImportantData) this.getApplication()).setCurrentUser(user);
-                    toHome();
-                }
-            } else {
-                Context context = getApplicationContext();
-                CharSequence text = "Login Incorrect";
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-            }
+            LoginController.login(this.getApplicationContext(), email, password);
         }
-        /*
-            if (email.equals("user@example.com") && password.equals("pass")) {
-                toHome();
-
-            } else {
-                Context context = getApplicationContext();
-                CharSequence text = "Login Incorrect";
-                int duration = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
-            }*/
-
 
     }
 
-    /**
-     * Sends the app to the HomeActivity.
-     */
-    private void toHome() {
-        Intent toHomeActivity = new Intent(this, HomeActivity.class);
-        startActivity(toHomeActivity);
-    }
 
     /**
      * Sends the app to the RegiserActivity.

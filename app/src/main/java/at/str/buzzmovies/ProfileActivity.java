@@ -80,7 +80,7 @@ public class ProfileActivity extends AppCompatActivity {
         user.setInterest(interestStr);
         user.setMajor(major);
         user.setName(name);
-        ((ImportantData) this.getApplication()).addUser(user.getEmail(), user);
+        //((ImportantData) this.getApplication()).addUser(user.getEmail(), user);
         ((ImportantData) this.getApplication()).setCurrentUser(user);
     }
 

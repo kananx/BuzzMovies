@@ -12,11 +12,13 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
+    <string name="api_login_route">"/user/login"</string>
+    
+    
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
     <string name="title_activity_home">HomeActivity</string>
-    <string name="urlString">buzzmovies.str.at/api/user/login</string>
     <string name="cancel_button_text">Cancel</string>
     <string name="logout_button_text">Logout</string>
     <string name="title_activity_profile">ProfileActivity</string>
@@ -28,6 +30,10 @@
     <string name="interests">Movie Interests</string>
     <string name="return_button">Save</string>
 
+
+    <!-- Strings related to the API -->
+    <string name="api_base_url">"http://buzzmovies.str.at/api"</string>
+    <string name="network_error_try">Check your network connection and try again</string>
 
     <!-- Strings related to Search -->
     <string name="search_hint">Search Title</string>

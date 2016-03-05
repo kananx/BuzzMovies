@@ -5,20 +5,20 @@ package at.str.buzzmovies;
  */
 public abstract class Account {
     protected String email;
-    protected String password;
+    protected String token;
     protected String status;
     protected String name;
 
     /**
      * Constructor for a new account.
      * @param email The account's email (cannot be changed)
-     * @param password The account's password
+     * @param token The account's password
      * @param status The account's status
      * @param name The account holder's name
      */
-    public Account(String email, String password, String status, String name) {
+    public Account(String email, String token, String status, String name) {
         this.email = email;
-        this.password = password;
+        this.token = token;
         this.status = status;
         this.name = name;
     }
@@ -36,7 +36,7 @@ public abstract class Account {
      * @return password
      */
     public String getPassword() {
-        return password;
+        return token;
     }
 
     /**
@@ -60,7 +60,7 @@ public abstract class Account {
      * @param newPass The new password
      */
     public void setPassword(String newPass) {
-        password = newPass;
+        token = newPass;
     }
 
     /**

@@ -84,9 +84,11 @@ public class LoginActivity extends AppCompatActivity {
      */
     private void toRegister(String email, String password) {
         //TODO: Put Extra Here
-        Intent toRegiserActivity = new Intent(this, RegistrationScreen.class);
-        startActivity(toRegiserActivity);
+        Intent toRegisterActivity = new Intent(this, RegistrationScreen.class);
+        startActivity(toRegisterActivity);
     }
+
+
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -131,7 +133,7 @@ public class LoginActivity extends AppCompatActivity {
             focusView.requestFocus();
         } else {
             //Pass Credentials to login controller for authentication
-            LoginController.login(this.getApplicationContext(), email, password);
+            LoginController.login(this.getApplicationContext(), this, email, password);
         }
     }
 

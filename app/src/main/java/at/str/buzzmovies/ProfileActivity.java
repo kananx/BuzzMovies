@@ -43,7 +43,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        user = ((ImportantData) this.getApplication()).getCurrentUser();
+        user = (User) localStore.getCurrentAccount();
 
         mEmail = (TextView) findViewById(R.id.email_textView);
         mEmail.setText(user.getEmail());
@@ -80,8 +80,7 @@ public class ProfileActivity extends AppCompatActivity {
         user.setInterest(interestStr);
         user.setMajor(major);
         user.setName(name);
-        //((ImportantData) this.getApplication()).addUser(user.getEmail(), user);
-        ((ImportantData) this.getApplication()).setCurrentUser(user);
+        localStore.setCurrentAccount(user);
     }
 
     private void toHome() {

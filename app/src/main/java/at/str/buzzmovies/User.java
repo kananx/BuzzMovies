@@ -11,16 +11,29 @@ public class User extends Account {
      * Constructor for a new account.
      *
      * @param email    The account's email (cannot be changed)
-     * @param password The account's password
+     * @param token The account's password
      * @param status   The account's status
      * @param name     The account holder's name
      * @param major    The account holder's major
      * @param interest The account holder's interests
      */
-    public User(String email, String password, String status, String name, String major, String interest) {
-        super(email, password, status, name);
+    public User(String email, String token, String status, String name, String major, String interest) {
+        super(email, token, status, name);
         this.major = major;
         this.interest = interest;
+    }
+
+
+    /**
+     * Cunstructor for new user account
+     * @param email The user's email
+     * @param token The user's API token
+     * @param name The user's name
+     */
+    public User(String email, String token, String name) {
+        super(email, token, null, name);
+        this.major = null;
+        this.interest = null;
     }
 
     /**

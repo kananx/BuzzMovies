@@ -2,8 +2,10 @@ package at.str.buzzmovies;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -38,8 +40,15 @@ public class LoginController {
 
         String url = context.getString(R.string.api_base_url) + context.getString(R.string.api_login_route);
 
+        Map<String, String> parameters = new HashMap<String, String>();
+
+        parameters.put("email", email);
+        parameters.put("password", password);
+
+        final JSONObject params = new JSONObject(parameters);
+
         JsonObjectRequest loginRequest = new JsonObjectRequest
-            (Request.Method.POST, url, null, new Response.Listener<JSONObject>() {
+            (Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
 
                 @Override
                 public void onResponse(JSONObject response) {
@@ -62,12 +71,7 @@ public class LoginController {
                 }
             }) {
 
-            protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("email", email);
-                params.put("password", password);
-                return params;
-            };
+            
         };;
 
         VolleyQueue.getInstance(context).addToRequestQueue(loginRequest);

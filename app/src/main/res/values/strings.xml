@@ -41,5 +41,13 @@
     <!-- String for search bar -->
     <string name="search_title">Search</string>
     <string name="title_activity_search_results">SearchResultsActivity</string>
+    <string name="title_activity_movie_screen">movieScreen</string>
+
+    <!-- String for movie Screen -->
+    <string name="reviewItButton">Rate it!</string>
+    <string name="rateMovieTextView">Rate this movie</string>
+    <string name="title_activity_review">reviewActivity</string>
+
+    <!-- String for review movie -->
 
 </resources>

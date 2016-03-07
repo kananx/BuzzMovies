@@ -1,5 +1,10 @@
 package at.str.buzzmovies;
 
+import android.media.Rating;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Movie {
     private String title;
     private String description;
@@ -46,7 +51,19 @@ public class Movie {
      * EMAIL (NAME), STATUS
      * @return movie info
      */
+
+    public void setTitle(String newTitle) {this.title = newTitle;}
+
+    public void setDescription(String newDescription) {this.description = newDescription;}
+
+    public void setGenre(String newGenre) {this.genre = newGenre;}
+
+    ArrayList<Rating> ratings = new ArrayList<>();
+
+
     public String toString() {
         return title + " [" + genre + "], " + description;
     }
+
+
 }

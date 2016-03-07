@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="at.str.buzzmovies.reviewActivity"
+    tools:context=".ReviewActivity"
     tools:showIn="@layout/activity_review">
 
     <TextView
@@ -35,7 +35,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/editText"
+        android:id="@+id/review"
         android:layout_marginTop="55dp"
         android:hint="Write your review"
         android:layout_centerHorizontal="true"

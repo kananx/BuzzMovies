@@ -1,5 +1,6 @@
 package at.str.buzzmovies;
 
+import android.content.Intent;
 import android.media.Rating;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -8,11 +9,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class reviewActivity extends AppCompatActivity {
+import java.lang.reflect.Array;
+
+public class ReviewActivity extends AppCompatActivity {
     private static RatingBar movieRating;
 
 
@@ -47,6 +51,8 @@ public class reviewActivity extends AppCompatActivity {
         });
 
 
+        EditText review = (EditText) findViewById(R.id.review);
+
     }
 
     public void listenerForRatingBar() {
@@ -65,8 +71,10 @@ public class reviewActivity extends AppCompatActivity {
     }
 
     public void submit() {
-        //push data from here to listview array
-
+        //arrylist of reviews for current movie
+        //reviews.add(movieRating.getRating(), review.getText(), user.getName(), user.getMajor();
+        Intent toMovieScreen = new Intent(this, MovieScreen.class);
+        startActivity(toMovieScreen);
 
     }
 }

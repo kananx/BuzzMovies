@@ -58,7 +58,9 @@ public class Movie {
 
     public void setGenre(String newGenre) {this.genre = newGenre;}
 
-    ArrayList<Rating> ratings = new ArrayList<>();
+    //holds the ratings and reviews that will be displayed in a listView
+    ArrayList<Review> reviews = new ArrayList<>();
+
 
 
     public String toString() {

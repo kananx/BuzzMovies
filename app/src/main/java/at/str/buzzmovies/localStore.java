@@ -13,4 +13,5 @@ public class localStore {
     public static void setCurrentAccount(Account account) {
         currentAccount = account;
     }
+
 }

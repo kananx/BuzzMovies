@@ -65,11 +65,11 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".movieScreen"
+            android:name=".MovieScreen"
             android:label="@string/title_activity_movie_screen"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".reviewActivity"
+            android:name=".ReviewActivity"
             android:label="@string/title_activity_review"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>

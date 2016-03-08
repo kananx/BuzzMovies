@@ -72,67 +72,31 @@ public class SearchableActivity extends AppCompatActivity {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
             doSearchQuery(query);
-            //msearchResults.setText(moviesInfo);
-            //msearchResults.setText(responseString[0]);
-
-
         }
     }
 
     public void doSearchQuery(String query) {
 
         //this is the URL for our REST service
-        String url = "http://omdbapi.com/?s=" + query;
+        String url = "http://omdbapi.com/?type=movie&s=" + query;
 
-        /*
-            We expect to get back a JSON response.  Volley also has String responses.
-            This is an async call, but all the threading is handled for us in the background
-            We just need 2 callback functions.
-                onResponse = this is called when the response actually comes back from server
-                onError = this is called if there is any error in the response
-         */
+
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject resp) {
-                        //handle a valid response coming back.  Getting this string mainly for debug
-                        msearchResults.setText(resp.toString());
-                        //printing first 500 chars of the response.  Only want to do this for debug
-
-/*
-
-                        //Now we parse the information.  Looking at the format, everything encapsulated in RestResponse object
-                        JSONObject obj1 = null;
                         try {
-                            obj1 = resp.getJSONObject("RestResponse");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }*/
-                        /*assert obj1 != null;
-                        //From that object, we extract the array of actual data labeled result
-                        JSONArray array = obj1.optJSONArray("result");
-                        ArrayList<NetworkInfo.State> states = new ArrayList<>();
-                        for(int i=0; i < array.length(); i++) {
-
-                            try {
-                                //for each array element, we have to create an object
-                                JSONObject jsonObject = array.getJSONObject(i);
-                                State s = new State();
-                                assert jsonObject != null;
-                                s.setName(jsonObject.optString("name"));
-                                s.setA2Code(jsonObject.optString("alpha2_code"));
-                                s.setA3Code(jsonObject.optString("alpha3_code"));
-                                //save the object for later
-                                states.add(s);
-
-
-                            } catch (JSONException e) {
-                                Log.d("VolleyApp", "Failed to get JSON object");
-                                e.printStackTrace();
+                            JSONArray results = resp.getJSONArray("Search");
+                            for (int i = 0; i < results.length(); i++) {
+                                JSONObject current = results.getJSONObject(i);
+                                String title = current.getString("Title");
+                                int year = Integer.parseInt(current.getString("Year"));
+                                String id = current.getString("imdbID");
+                                localStore.addMovie(new Movie(title,"",year,"",id));
                             }
+                        } catch (Exception e) {
+                            Log.w("Network", "Error Parsing JSON");
                         }
-                        //once we have all data, then go to list screen
-                        changeView(states);*/
                     }
                 }, new Response.ErrorListener() {
 
@@ -144,8 +108,8 @@ public class SearchableActivity extends AppCompatActivity {
 
                     }
                 });
-        //this actually queues up the async response with Volley
-        queue.add(jsObjRequest);
+
+        VolleyQueue.getInstance().addToRequestQueue(jsObjRequest);
     }
 
 }

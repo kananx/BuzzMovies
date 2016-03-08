@@ -6,11 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Movie {
-    private String title;
-    private String plot;
-    private int year;
-    private String genre;
-    private String imdbId;
+    protected String title;
+    protected String plot;
+    protected int year;
+    protected String genre;
+    protected String imdbId;
+
 
 
     /**
@@ -69,6 +70,7 @@ public class Movie {
         this.title = newTitle;
     }
 
+<<<<<<< HEAD
     /**
      * set new plot for movie
      * @param newPlot the new plot for the movie
@@ -76,6 +78,9 @@ public class Movie {
     public void setPlot(String newPlot) {
         this.plot = newPlot;
     }
+=======
+    public String getimdbId() {return imdbId;}
+>>>>>>> 94b6f5ddcfd184fd5115dc53ec6a5e3518820ea6
 
     /**
      * set new genre for the movie

@@ -85,8 +85,8 @@ public class ReviewActivity extends AppCompatActivity {
         //reviews.add(movieRating.getRating(), review.getText(), user.getName(), user.getMajor();
 
         Review rev = new Review(movieRating.getRating(), review.getText(), localStore.getCurrentAccount().getName(),
-                localStore.getCurrentAccount().getMajor(), moviex);
-        localStore.add(rev);
+                ((User)localStore.getCurrentAccount()).getMajor(), moviex.getimdbID());
+        localStore.addReview(rev);
         Intent toMovieScreen = new Intent(this, MovieScreen.class);
         startActivity(toMovieScreen);
 

@@ -70,7 +70,7 @@ public class Movie {
         this.title = newTitle;
     }
 
-<<<<<<< HEAD
+
     /**
      * set new plot for movie
      * @param newPlot the new plot for the movie
@@ -78,9 +78,7 @@ public class Movie {
     public void setPlot(String newPlot) {
         this.plot = newPlot;
     }
-=======
-    public String getimdbId() {return imdbId;}
->>>>>>> 94b6f5ddcfd184fd5115dc53ec6a5e3518820ea6
+
 
     /**
      * set new genre for the movie

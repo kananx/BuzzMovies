@@ -47,4 +47,14 @@ public class localStore {
     public static ArrayList<Movie> getMovies() {
         return movies;
     }
+
+    public static Movie getMovieByID(String id) {
+        for (Movie movie:movies ) {
+            String key = movie.getId();
+            if (key.equals(id)) {
+                return movie;
+            }
+        }
+        return null;
+    }
 }

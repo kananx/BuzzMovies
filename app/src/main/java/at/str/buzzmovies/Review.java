@@ -7,19 +7,21 @@ import android.media.Rating;
  */
 public class Review {
 
-        protected Rating rating;
+        protected float rating;
         protected String review;
         protected String reviewer;
         protected String major;
+        protected Movie movie;
 
-        public Review (Rating rating, String review,  String reviewer, String major) {
+        public Review (float rating, String review,  String reviewer, String major, Movie movie) {
             this.rating = rating;
             this.reviewer = reviewer;
             this.major = major;
             this.review = review;
+            this.movie = movie;
         }
 
-        public void setRating(Rating rating) { this.rating = rating;}
+        public void setRating(float rating) { this.rating = rating;}
 
         public void setReview(String review) {this.review = review;}
 
@@ -27,13 +29,17 @@ public class Review {
 
         public void setMajor(String major) {this.major = major;}
 
-        public Rating getRating() {return rating;}
+        public void setMovie(Movie movie) {this.movie = movie;}
+
+        public float getRating() {return rating;}
 
         public String getReview() {return review;}
 
         public String getReviewer() {return reviewer;}
 
         public String getMajor() {return major;}
+
+        public Movie getMovie() {return movie;}
 
     public String toString() {
         return reviewer + "gave this movie " + rating + " stars, and said" + review;

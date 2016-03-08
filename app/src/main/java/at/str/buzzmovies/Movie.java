@@ -6,9 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Movie {
-    private String title;
-    private String description;
-    private String genre;
+    private String Title;
+    private String Plot;
+    private String Genre;
+    private String imdbId;
+
 
     /**
      * Constructor for a new movie.
@@ -16,10 +18,11 @@ public class Movie {
      * @param description the movie's description
      * @param genre the movie's genre
      */
-    public Movie(String title, String description, String genre) {
-        this.title = title;
-        this.description = description;
-        this.genre = genre;
+    public Movie(String title, String description, String genre, String id) {
+        this.Title = title;
+        this.Plot = description;
+        this.Genre = genre;
+        this.imdbId = id;
     }
 
     /**
@@ -27,7 +30,7 @@ public class Movie {
      * @return title
      */
     public String getTitle() {
-        return title;
+        return Title;
     }
 
     /**
@@ -35,7 +38,7 @@ public class Movie {
      * @return description
      */
     public String getDescription() {
-        return description;
+        return Plot;
     }
 
     /**
@@ -43,8 +46,11 @@ public class Movie {
      * @return genre
      */
     public String getGenre() {
-        return genre;
+        return Genre;
     }
+
+
+    public String getId() {return imdbId;}
 
     /**
      * Returns movie info in the following format:
@@ -52,11 +58,13 @@ public class Movie {
      * @return movie info
      */
 
-    public void setTitle(String newTitle) {this.title = newTitle;}
+    public void setTitle(String newTitle) {this.Title = newTitle;}
 
-    public void setDescription(String newDescription) {this.description = newDescription;}
+    public void setDescription(String newDescription) {this.Plot = newDescription;}
 
-    public void setGenre(String newGenre) {this.genre = newGenre;}
+    public void setGenre(String newGenre) {this.Genre = newGenre;}
+
+    public void setId(String newId) {this.imdbId = newId;}
 
     //holds the ratings and reviews that will be displayed in a listView
     ArrayList<Review> reviews = new ArrayList<>();
@@ -64,7 +72,7 @@ public class Movie {
 
 
     public String toString() {
-        return title + " [" + genre + "], " + description;
+        return Title + " [" + Genre + "], " + Plot;
     }
 
 

@@ -18,6 +18,7 @@ import java.lang.reflect.Array;
 
 public class ReviewActivity extends AppCompatActivity {
     private static RatingBar movieRating;
+    private EditText review;
 
 
     @Override
@@ -39,7 +40,17 @@ public class ReviewActivity extends AppCompatActivity {
 
 
         TextView reviewTitle = (TextView) findViewById(R.id.reviewTitle);
+        review = (EditText) findViewById(R.id.review);
         //reviewTitle.setText(moviex.getTitle());
+
+        //String existingRev = localStore.findReview(localStore.getCurrentAccount(), movieID);
+        if (existingRev != null) {
+            review.setText(existingRev.getReview());
+            review.setRating(existingRev.getRating());
+
+
+        }
+
 
         listenerForRatingBar();
         Button submitButton = (Button) findViewById(R.id.submitReviewButton);
@@ -51,7 +62,6 @@ public class ReviewActivity extends AppCompatActivity {
         });
 
 
-        EditText review = (EditText) findViewById(R.id.review);
 
     }
 
@@ -73,6 +83,10 @@ public class ReviewActivity extends AppCompatActivity {
     public void submit() {
         //arrylist of reviews for current movie
         //reviews.add(movieRating.getRating(), review.getText(), user.getName(), user.getMajor();
+
+        Review rev = new Review(movieRating.getRating(), review.getText(), localStore.getCurrentAccount().getName(),
+                localStore.getCurrentAccount().getMajor(), moviex);
+        localStore.add(rev);
         Intent toMovieScreen = new Intent(this, MovieScreen.class);
         startActivity(toMovieScreen);
 

@@ -4,8 +4,8 @@ package at.str.buzzmovies;
  * Class to make User Account @inherits
  */
 public class User extends Account {
-    private String major;
-    private String interest;
+    protected String major;
+    protected String interest;
 
     /**
      * Constructor for a new account.

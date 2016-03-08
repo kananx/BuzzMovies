@@ -17,9 +17,9 @@ import android.widget.Toast;
 import java.lang.reflect.Array;
 
 public class ReviewActivity extends AppCompatActivity {
-    private static RatingBar movieRating;
-    private EditText review;
-
+    protected static RatingBar movieRating;
+    protected EditText review;
+    protected Movie movie;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,17 +38,20 @@ public class ReviewActivity extends AppCompatActivity {
             }
         });
 
+        Intent intent = getIntent();
+        String movieID = intent.getStringExtra(MovieScreen.MOVIE_ID);
+        movie = localStore.getMovieByID(movieID);
 
         TextView reviewTitle = (TextView) findViewById(R.id.reviewTitle);
         review = (EditText) findViewById(R.id.review);
-        //reviewTitle.setText(moviex.getTitle());
+        reviewTitle.setText(movie.getTitle());
 
-        //String existingRev = localStore.findReview(localStore.getCurrentAccount(), movieID);
+
+
+        Review existingRev = localStore.findReview(localStore.getCurrentAccount(), movieID);
         if (existingRev != null) {
             review.setText(existingRev.getReview());
-            review.setRating(existingRev.getRating());
-
-
+            movieRating.setRating(existingRev.getRating());
         }
 
 
@@ -60,8 +63,6 @@ public class ReviewActivity extends AppCompatActivity {
                 submit();
             }
         });
-
-
 
     }
 
@@ -84,9 +85,9 @@ public class ReviewActivity extends AppCompatActivity {
         //arrylist of reviews for current movie
         //reviews.add(movieRating.getRating(), review.getText(), user.getName(), user.getMajor();
 
-        Review rev = new Review(movieRating.getRating(), review.getText(), localStore.getCurrentAccount().getName(),
-                localStore.getCurrentAccount().getMajor(), moviex);
-        localStore.add(rev);
+        Review rev = new Review(movieRating.getRating(), review.getText().toString(), localStore.getCurrentAccount().getName(),
+                ((User)localStore.getCurrentAccount()).getMajor(), movie);
+        localStore.addReview(rev);
         Intent toMovieScreen = new Intent(this, MovieScreen.class);
         startActivity(toMovieScreen);
 

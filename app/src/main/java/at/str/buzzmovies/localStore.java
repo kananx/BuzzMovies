@@ -9,6 +9,7 @@ public class localStore {
 
     private static ArrayList<Review> reviews = new ArrayList<Review>();
     private static Account currentAccount = null;
+    private static ArrayList<Movie> movies = new ArrayList<Movie>();
 
 
     public static Account getCurrentAccount() {
@@ -31,8 +32,29 @@ public class localStore {
 
     }
 
-    public static void add (Review rev) {
+    public static void addReview (Review rev) {
         reviews.add(rev);
     }
 
+    public static void addMovie(Movie movie) {
+        movies.add(movie);
+    }
+
+    public static void clearMovies() {
+        movies.clear();
+    }
+
+    public static ArrayList<Movie> getMovies() {
+        return movies;
+    }
+
+    public static Movie getMovieByID(String id) {
+        for (Movie movie:movies ) {
+            String key = movie.getId();
+            if (key.equals(id)) {
+                return movie;
+            }
+        }
+        return null;
+    }
 }

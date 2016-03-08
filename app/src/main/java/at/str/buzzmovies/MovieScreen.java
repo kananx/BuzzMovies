@@ -13,7 +13,7 @@ import android.widget.TextView;
 import org.w3c.dom.Text;
 
 public class MovieScreen extends AppCompatActivity {
-
+    public final static String MOVIE_ID = "at.str.buzzmovies.MESSAGE";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +45,8 @@ public class MovieScreen extends AppCompatActivity {
         addRating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                review();
+                // TODO: 3/8/16 Update with movie ID var 
+                review("");
             }
         });
 
@@ -53,8 +54,9 @@ public class MovieScreen extends AppCompatActivity {
     }
 
 
-    public void review() {
+    public void review(String movieID) {
         Intent toReviewActivity = new Intent(this, ReviewActivity.class);
+        toReviewActivity.putExtra(MOVIE_ID, movieID);
         startActivity(toReviewActivity);
 
 

@@ -54,16 +54,19 @@ public class LoginController {
                             String name = response.getString("name");
 
                             localStore.setCurrentAccount(new User(email, token, name));
+
+                            Intent toHomeActivity = new Intent(callee, HomeActivity.class);
+                            callee.startActivity(toHomeActivity);
+
                         } else {
 
                         }
 
                     } catch (Exception e) {
-                        Log.d("Login", "Login parse Failed");
+                        Log.w("Login", "Login parse Failed");
                     }
 
-                    Intent toHomeActivity = new Intent(callee, HomeActivity.class);
-                    callee.startActivity(toHomeActivity);
+
 
                 }
             }, new Response.ErrorListener() {

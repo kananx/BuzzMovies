@@ -6,22 +6,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Movie {
-    private String Title;
-    private String Plot;
-    private String Genre;
-    private String imdbId;
+    protected String title;
+    protected String plot;
+    protected int year;
+    protected String genre;
+    protected String imdbId;
+
 
 
     /**
      * Constructor for a new movie.
      * @param title the movie's title
-     * @param description the movie's description
+     * @param plot the movie's description
+     * @param year year the movie was released
      * @param genre the movie's genre
+     * @param id IMDB ID of the movie
      */
-    public Movie(String title, String description, String genre, String id) {
-        this.Title = title;
-        this.Plot = description;
-        this.Genre = genre;
+    public Movie(String title, String plot, int year, String genre, String id) {
+        this.title = title;
+        this.plot = plot;
+        this.year = year;
+        this.genre = genre;
         this.imdbId = id;
     }
 
@@ -30,15 +35,15 @@ public class Movie {
      * @return title
      */
     public String getTitle() {
-        return Title;
+        return title;
     }
 
     /**
-     * Returns the movie's description
+     * Returns the movie's plot
      * @return description
      */
-    public String getDescription() {
-        return Plot;
+    public String getPlot() {
+        return plot;
     }
 
     /**
@@ -46,25 +51,67 @@ public class Movie {
      * @return genre
      */
     public String getGenre() {
-        return Genre;
+        return genre;
+    }
+
+    /**
+     * Getter for IMDB ID
+     * @return IMDB ID
+     */
+    public String getId() {
+        return imdbId;
+    }
+
+    /**
+     * set new title for movie object
+     * @param newTitle the new title for the movie object
+     */
+    public void setTitle(String newTitle) {
+        this.title = newTitle;
     }
 
 
-    public String getId() {return imdbId;}
+    /**
+     * set new plot for movie
+     * @param newPlot the new plot for the movie
+     */
+    public void setPlot(String newPlot) {
+        this.plot = newPlot;
+    }
+
 
     /**
-     * Returns movie info in the following format:
-     * EMAIL (NAME), STATUS
-     * @return movie info
+     * set new genre for the movie
+     * @param newGenre genre for movie
      */
+    public void setGenre(String newGenre) {
+        this.genre = newGenre;
+    }
 
-    public void setTitle(String newTitle) {this.Title = newTitle;}
+    /**
+     * set new ID for movie
+     * @param newId IMDB ID
+     */
+    public void setId(String newId) {
+        this.imdbId = newId;
+    }
 
-    public void setDescription(String newDescription) {this.Plot = newDescription;}
+    /**
+     * set year of release of movie
+     * @param year year of release
+     */
+    public void setYear(int year) {
+        this.year = year;
+    }
 
-    public void setGenre(String newGenre) {this.Genre = newGenre;}
+    /**
+     * Returns the movie's year of release
+     * @return year of release
+     */
+    public int getYear() {
+        return this.year;
+    }
 
-    public void setId(String newId) {this.imdbId = newId;}
 
     //holds the ratings and reviews that will be displayed in a listView
     ArrayList<Review> reviews = new ArrayList<>();
@@ -72,7 +119,7 @@ public class Movie {
 
 
     public String toString() {
-        return Title + " [" + Genre + "], " + Plot;
+        return title + " [" + year + "], " + plot;
     }
 
 

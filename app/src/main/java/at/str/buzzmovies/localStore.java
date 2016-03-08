@@ -31,7 +31,7 @@ public class localStore {
 
     }
 
-    public static void add (Review rev) {
+    public static void addReview (Review rev) {
         reviews.add(rev);
     }
 

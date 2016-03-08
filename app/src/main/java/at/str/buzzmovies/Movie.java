@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Movie {
-    private String Title;
-    private String Plot;
-    private String Genre;
-    private String imdbId;
+    protected String Title;
+    protected String Plot;
+    protected String Genre;
+    protected String imdbId;
 
 
     /**
@@ -50,7 +50,7 @@ public class Movie {
     }
 
 
-    public String getId() {return imdbId;}
+    public String getimdbId() {return imdbId;}
 
     /**
      * Returns movie info in the following format:

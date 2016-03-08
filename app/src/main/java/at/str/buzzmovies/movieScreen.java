@@ -60,4 +60,10 @@ public class MovieScreen extends AppCompatActivity {
 
     }
 
+    RecyclerView rv = (RecyclerView)findViewById(R.id.rv);
+    rv.setHasFixedSize(true);
+
+    LinearLayoutManager llm = new LinearLayoutManager(context);
+    rv.setLayoutManager(llm);
+
 }

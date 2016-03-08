@@ -16,6 +16,10 @@ import static android.support.v4.media.session.MediaButtonReceiver.handleIntent;
 
 public class SearchResultsActivity extends AppCompatActivity {
 
+    private RecyclerView mRecyclerView;
+    private RecyclerView.Adapter mAdapter;
+    //private RecyclerView.LayoutManager mLayoutManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,8 +38,10 @@ public class SearchResultsActivity extends AppCompatActivity {
 
         handleIntent(getIntent());
 
+        mRecyclerView = (RecyclerView) findViewById(R.id.rv);
 
-
+        mAdapter = new RVAdapter(localStore.getMovies());
+        mRecyclerView.setAdapter(mAdapter);
 
     }
 
@@ -52,15 +58,6 @@ public class SearchResultsActivity extends AppCompatActivity {
             //use the query to search your data somehow
         }
     }
-
-    RecyclerView rv = (RecyclerView)findViewById(R.id.rv);
-    rv.setHasFixedSize(true);
-
-    LinearLayoutManager llm = new LinearLayoutManager(context);
-    rv.setLayoutManager(llm);
-
-    RVAdapter adapter = new RVAdapter(movies);
-    rv.setAdapter(adapter);
 
 
 

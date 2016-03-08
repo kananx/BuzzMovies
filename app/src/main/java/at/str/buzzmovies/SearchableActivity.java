@@ -45,7 +45,6 @@ public class SearchableActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_results);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        msearchResults = (TextView) findViewById(R.id.resultTextView2);
         queue = Volley.newRequestQueue(this);
 
 
@@ -94,8 +93,9 @@ public class SearchableActivity extends AppCompatActivity {
                                 String id = current.getString("imdbID");
                                 localStore.addMovie(new Movie(title,"",year,"",id));
                             }
+                            Log.i("Network","Movies Found: " + localStore.getMovies().size());
                         } catch (Exception e) {
-                            Log.w("Network", "Error Parsing JSON");
+                            Log.e("Network", "Error Parsing JSON");
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -109,7 +109,7 @@ public class SearchableActivity extends AppCompatActivity {
                     }
                 });
 
-        VolleyQueue.getInstance().addToRequestQueue(jsObjRequest);
+        VolleyQueue.getInstance(this.getApplicationContext()).addToRequestQueue(jsObjRequest);
     }
 
 }

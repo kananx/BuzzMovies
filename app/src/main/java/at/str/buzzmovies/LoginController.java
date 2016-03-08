@@ -81,7 +81,7 @@ public class LoginController {
             }) {
 
 
-        };;
+        };
 
         VolleyQueue.getInstance(context).addToRequestQueue(loginRequest);
 

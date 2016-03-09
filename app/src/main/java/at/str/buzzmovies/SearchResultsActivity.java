@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.content.Intent;
 import android.app.SearchManager;
@@ -37,6 +38,8 @@ public class SearchResultsActivity extends AppCompatActivity {
         });
 
         handleIntent(getIntent());
+
+        Log.d("SearchResults", "OnCreate");
 
         mRecyclerView = (RecyclerView) findViewById(R.id.rv);
 

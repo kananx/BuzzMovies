@@ -42,7 +42,7 @@ public class SearchableActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_results);
+        //setContentView(R.layout.activity_search_results);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         queue = Volley.newRequestQueue(this);
@@ -94,6 +94,10 @@ public class SearchableActivity extends AppCompatActivity {
                                 localStore.addMovie(new Movie(title,"",year,"",id));
                             }
                             Log.i("Network","Movies Found: " + localStore.getMovies().size());
+
+                            Intent intent = new Intent(SearchableActivity.this, SearchResultsActivity.class);
+                            startActivity(intent);
+
                         } catch (Exception e) {
                             Log.e("Network", "Error Parsing JSON");
                         }

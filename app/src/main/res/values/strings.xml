@@ -35,19 +35,18 @@
     <string name="api_base_url">"http://buzzmovies.str.at/api"</string>
     <string name="network_error_try">Check your network connection and try again</string>
 
-    <!-- Strings related to Search -->
-    <string name="search_hint">Search Title</string>
-    <string name="settings_description">Movies</string>
     <!-- String for search bar -->
     <string name="search_title">Search</string>
-    <string name="title_activity_search_results">SearchResultsActivity</string>
-    <string name="title_activity_movie_screen">movieScreen</string>
+    <string name="title_activity_search_results">Search Results</string>
+    <string name="title_activity_movie_screen">Movies</string>
 
     <!-- String for movie Screen -->
     <string name="reviewItButton">Rate it!</string>
     <string name="rateMovieTextView">Rate this movie</string>
     <string name="title_activity_review">reviewActivity</string>
 
-    <!-- String for review movie -->
+    <!-- Strings for search -->
+    <string name="app_label">Buzz Movies</string>
+    <string name="search_hint">Search Movies</string>
 
 </resources>

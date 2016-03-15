@@ -20,6 +20,7 @@ public class ReviewActivity extends AppCompatActivity {
     protected static RatingBar movieRating;
     protected EditText review;
     protected Movie movie;
+    Review currentReview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +49,12 @@ public class ReviewActivity extends AppCompatActivity {
 
 
 
-        Review existingRev = localStore.findReview(localStore.getCurrentAccount(), movieID);
-        if (existingRev != null) {
-            review.setText(existingRev.getReview());
-            movieRating.setRating(existingRev.getRating());
+        currentReview = localStore.findReview(localStore.getCurrentAccount(), movieID);
+        if (currentReview != null) {
+            review.setText(currentReview.getReview());
+            movieRating.setRating(currentReview.getRating());
+        } else {
+            currentReview = new Review();
         }
 
 
@@ -73,6 +76,7 @@ public class ReviewActivity extends AppCompatActivity {
                     @Override
                     public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                         Toast.makeText(getApplicationContext(), "Your Selected Rating :" + String.valueOf(rating), Toast.LENGTH_SHORT).show();
+                        currentReview.setRating(rating);
                     }
                 }
         );
@@ -84,10 +88,11 @@ public class ReviewActivity extends AppCompatActivity {
         //arrylist of reviews for current movie
         //reviews.add(movieRating.getRating(), review.getText(), user.getName(), user.getMajor();
 
-        Review rev = new Review(movieRating.getRating(), review.getText().toString(), localStore.getCurrentAccount().getName(),
-                ((User)localStore.getCurrentAccount()).getMajor(), movie);
-        localStore.addReview(rev);
-        Intent toMovieScreen = new Intent(this, MovieScreen.class);
+        currentReview.setReview(review.getText().toString());
+        currentReview.setMajor(((User) localStore.getCurrentAccount()).getMajor());
+        currentReview.setReviewer((User) localStore.getCurrentAccount());
+        localStore.addReview(currentReview);
+        Intent toMovieScreen = new Intent(this, HomeActivity.class);
         startActivity(toMovieScreen);
 
     }

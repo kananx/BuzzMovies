@@ -9,11 +9,11 @@ public class Review {
 
         protected float rating;
         protected String review;
-        protected String reviewer;
+        protected User reviewer;
         protected String major;
         protected Movie movie;
 
-        public Review (float rating, String review,  String reviewer, String major, Movie movie) {
+        public Review (float rating, String review,  User reviewer, String major, Movie movie) {
             this.rating = rating;
             this.reviewer = reviewer;
             this.major = major;
@@ -21,11 +21,13 @@ public class Review {
             this.movie = movie;
         }
 
+        public Review() {};
+
         public void setRating(float rating) { this.rating = rating;}
 
         public void setReview(String review) {this.review = review;}
 
-        public void setReviewer(String reviewer) {this.reviewer = reviewer;}
+        public void setReviewer(User reviewer) {this.reviewer = reviewer;}
 
         public void setMajor(String major) {this.major = major;}
 
@@ -35,7 +37,7 @@ public class Review {
 
         public String getReview() {return review;}
 
-        public String getReviewer() {return reviewer;}
+        public User getReviewer() {return reviewer;}
 
         public String getMajor() {return major;}
 

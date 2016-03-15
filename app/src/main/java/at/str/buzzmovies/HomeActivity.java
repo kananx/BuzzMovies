@@ -80,7 +80,7 @@ public class HomeActivity extends Activity {
                 profile();
                 return true;
             case R.id.search:
-                onSearchRequested();
+                //onSearchRequested();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

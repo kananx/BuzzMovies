@@ -10,14 +10,28 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 /**
- * The registationActivity page for new users to create an account
+ * The RegistrationActivity page for new users to create an account
  */
 public class RegistrationScreen extends AppCompatActivity {
+
+    static String defaultEmail;
+    static String defaultPass;
+    EditText mEmail;
+    EditText mPasswordView;
+    EditText mConfirmPasswordView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_screen);
+
+        mEmail = (EditText) findViewById(R.id.Email_Register);
+        mPasswordView = (EditText) findViewById(R.id.Password_Register);
+        mConfirmPasswordView = (EditText) findViewById(R.id.Password_confirm);
+        mEmail.setText(defaultEmail);
+        mPasswordView.setText(defaultPass);
+        defaultEmail = "";
+        defaultPass = "";
 
         Button mCancelButton = (Button) findViewById(R.id.cancel_reg);
         mCancelButton.setOnClickListener(new View.OnClickListener() {
@@ -27,7 +41,7 @@ public class RegistrationScreen extends AppCompatActivity {
             }
         });
 
-        //Submit Registation Button and action
+        //Submit Registration Button and action
         Button mRegisterButton = (Button) findViewById(R.id.submit_reg);
         mRegisterButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,15 +59,18 @@ public class RegistrationScreen extends AppCompatActivity {
         startActivity(toLoginActivity);
     }
     private void register() {
-        EditText mPasswordView = (EditText) findViewById(R.id.Password_Register);
-        EditText mConfirmPasswordView = (EditText) findViewById(R.id.Password_confirm);
-        EditText mEmail = (EditText) findViewById(R.id.Email_Register);
+        String email = mEmail.getText().toString();
         String password = mPasswordView.getText().toString();
         String confirmPassword = mConfirmPasswordView.getText().toString();
-        String email = mEmail.getText().toString();
         if (!(password.equals(confirmPassword))) {
             Context context = getApplicationContext();
-            CharSequence text = "Password do not match";
+            CharSequence text = "Passwords do not match";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        } else if (password.length() < 4) {
+            Context context = getApplicationContext();
+            CharSequence text = "Password must be at least 4 characters";
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();

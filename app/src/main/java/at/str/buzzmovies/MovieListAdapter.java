@@ -15,6 +15,7 @@ import java.util.List;
 
 
 public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.MovieViewHolder>{
+    public final static String MOVIE_POSITION = "at.str.buzzmovies.MESSAGE";
 
     private List<Movie> movies;
 
@@ -63,7 +64,7 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     }
 
     @Override
-    public void onBindViewHolder(final MovieViewHolder holder, int position) {
+    public void onBindViewHolder(final MovieViewHolder holder, final int position) {
         holder.mTextView.setText(movies.get(position).getTitle());
         holder.movie = movies.get(position);
         holder.position = position;
@@ -73,10 +74,10 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
             @Override
             public void onClick(View v) {
                 Context context = v.getContext();
+
+                Log.d("OnMovieListClick","Movie Position Clicked: " + holder.position);
                 Intent intent = new Intent(context, MovieScreen.class);
-            //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~movieID?
-                intent.putExtra(MovieScreen.MOVIE_ID, holder.movie.getId());
-                Log.d("On Click", "Movie Title: " + holder.position);
+                intent.putExtra(MOVIE_POSITION, holder.position);
                 context.startActivity(intent);
             }
         });

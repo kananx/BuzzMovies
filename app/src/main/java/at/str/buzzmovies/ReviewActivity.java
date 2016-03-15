@@ -73,7 +73,6 @@ public class ReviewActivity extends AppCompatActivity {
                     @Override
                     public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
                         Toast.makeText(getApplicationContext(), "Your Selected Rating :" + String.valueOf(rating), Toast.LENGTH_SHORT).show();
-
                     }
                 }
         );

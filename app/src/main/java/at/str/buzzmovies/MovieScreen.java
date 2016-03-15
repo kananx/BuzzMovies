@@ -14,6 +14,7 @@ import org.w3c.dom.Text;
 
 public class MovieScreen extends AppCompatActivity {
     public final static String MOVIE_ID = "at.str.buzzmovies.MESSAGE";
+    Movie currentMovie;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,14 +31,18 @@ public class MovieScreen extends AppCompatActivity {
             }
         });
 
+        Intent intent = getIntent();
+        int moviePosition = intent.getIntExtra(MovieListAdapter.MOVIE_POSITION, 0);
+        currentMovie = localStore.getMovies().get(moviePosition);
+
 
         TextView movieTitle = (TextView) findViewById(R.id.movieTitle);
         TextView movieGenre = (TextView) findViewById(R.id.movieGenre);
         TextView movieDescr = (TextView) findViewById(R.id.movieDescription);
 
-        //movieTitle.setText(moviex.getTitle);
-        //movieGenre.setText(moviex.getgenre);
-        //movieDescr.setText(moviex.getgenre);
+        movieTitle.setText(currentMovie.getTitle());
+        //movieGenre.setText(currentMovie.get);
+        movieDescr.setText(currentMovie.getPlot());
 
         //implement viewList of reviews
 
@@ -45,8 +50,7 @@ public class MovieScreen extends AppCompatActivity {
         addRating.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: 3/8/16 Update with movie ID var 
-                review("");
+                review(currentMovie.getId());
             }
         });
 
@@ -58,8 +62,6 @@ public class MovieScreen extends AppCompatActivity {
         Intent toReviewActivity = new Intent(this, ReviewActivity.class);
         toReviewActivity.putExtra(MOVIE_ID, movieID);
         startActivity(toReviewActivity);
-
-
     }
 
 

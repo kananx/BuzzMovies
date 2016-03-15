@@ -3,6 +3,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +18,31 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
 
     private List<Movie> movies;
 
-    public static class MovieViewHolder extends RecyclerView.ViewHolder {
+    public static class MovieViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         public TextView mTextView;
+        public Movie movie;
+        public int position;
+        //public IMyViewHolderClicks mListener;
 
         MovieViewHolder(TextView v) {
             super(v);
+            v.setClickable(true);
+            v.setOnClickListener(this);
+            //mListener = listener;
             mTextView = v;
         }
+
+        @Override
+        public void onClick(View v) {
+            Log.d("on click", "clicked");
+        }
+
+        /*
+        public static interface IMyViewHolderClicks {
+            public void onMovieClick(View caller);
+        }*/
+
+
 
     }
 
@@ -44,8 +63,10 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
     }
 
     @Override
-    public void onBindViewHolder(MovieViewHolder holder, int position) {
+    public void onBindViewHolder(final MovieViewHolder holder, int position) {
         holder.mTextView.setText(movies.get(position).getTitle());
+        holder.movie = movies.get(position);
+        holder.position = position;
 
 
         holder.mTextView.setOnClickListener(new View.OnClickListener() {
@@ -54,11 +75,12 @@ public class MovieListAdapter extends RecyclerView.Adapter<MovieListAdapter.Movi
                 Context context = v.getContext();
                 Intent intent = new Intent(context, MovieScreen.class);
             //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~movieID?
-                //intent.putExtra(MovieScreen.MOVIE_ID, ) );
-
+                intent.putExtra(MovieScreen.MOVIE_ID, holder.movie.getId());
+                Log.d("On Click", "Movie Title: " + holder.position);
                 context.startActivity(intent);
             }
         });
+
 
     }
 /*

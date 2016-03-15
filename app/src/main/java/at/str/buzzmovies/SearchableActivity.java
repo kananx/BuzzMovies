@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -39,10 +41,15 @@ public class SearchableActivity extends AppCompatActivity {
     private RequestQueue queue;
     private String response;
 
+    private RecyclerView mRecylerView;
+    private RecyclerView.Adapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_search_results);
+        setContentView(R.layout.activity_search_results);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         queue = Volley.newRequestQueue(this);
@@ -57,7 +64,18 @@ public class SearchableActivity extends AppCompatActivity {
             }
         });
 
+
         handleIntent(getIntent());
+
+        setContentView(R.layout.activity_search_results);
+        mRecylerView = (RecyclerView) findViewById(R.id.searchResultsRecyclerView);
+
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecylerView.setLayoutManager(mLayoutManager);
+
+        mAdapter = new MovieListAdapter(localStore.getMovies());
+        mRecylerView.setAdapter(mAdapter);
+
     }
 
     @Override
@@ -93,10 +111,7 @@ public class SearchableActivity extends AppCompatActivity {
                                 String id = current.getString("imdbID");
                                 localStore.addMovie(new Movie(title,"",year,"",id));
                             }
-                            Log.i("Network","Movies Found: " + localStore.getMovies().size());
-
-                            Intent intent = new Intent(SearchableActivity.this, SearchResultsActivity.class);
-                            startActivity(intent);
+                            Log.i("Network", "Movies Found: " + localStore.getMovies().size());
 
                         } catch (Exception e) {
                             Log.e("Network", "Error Parsing JSON");

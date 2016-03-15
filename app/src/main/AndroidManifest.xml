@@ -48,10 +48,6 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
-            android:name=".SearchResultsActivity"
-            android:label="@string/title_activity_search_results"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".SearchableActivity"
             android:label="@string/title_activity_search_results"
             android:launchMode="singleTop"

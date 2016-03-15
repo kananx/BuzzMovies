@@ -73,8 +73,7 @@ public class SearchableActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecylerView.setLayoutManager(mLayoutManager);
 
-        mAdapter = new MovieListAdapter(localStore.getMovies());
-        mRecylerView.setAdapter(mAdapter);
+
 
     }
 
@@ -92,11 +91,16 @@ public class SearchableActivity extends AppCompatActivity {
         }
     }
 
+    private void populateMovieList() {
+        mAdapter = new MovieListAdapter(localStore.getMovies());
+        mRecylerView.setAdapter(mAdapter);
+    }
+
     public void doSearchQuery(String query) {
 
         //this is the URL for our REST service
         String url = "http://omdbapi.com/?type=movie&s=" + query;
-
+        localStore.clearMovies();
 
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -116,6 +120,9 @@ public class SearchableActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             Log.e("Network", "Error Parsing JSON");
                         }
+
+                        populateMovieList();
+
                     }
                 }, new Response.ErrorListener() {
 

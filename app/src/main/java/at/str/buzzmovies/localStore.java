@@ -22,10 +22,10 @@ public class localStore {
 
     public static Review findReview(Account user, String id) {
 
-        for (Review rev: reviews ) {
-            String key = rev.getMovie().getId();
+        for (Review review: reviews ) {
+            String key = review.getMovie().getId();
             if (key.equals(id)) {
-                return rev;
+                return review;
             }
         }
         return null;

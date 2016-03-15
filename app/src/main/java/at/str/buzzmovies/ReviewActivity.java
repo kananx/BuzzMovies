@@ -7,6 +7,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,7 +19,7 @@ import java.lang.reflect.Array;
 
 public class ReviewActivity extends AppCompatActivity {
     protected static RatingBar movieRating;
-    protected EditText review;
+    protected EditText mReview;
     protected Movie movie;
     Review currentReview;
 
@@ -44,14 +45,14 @@ public class ReviewActivity extends AppCompatActivity {
         movie = localStore.getMovieByID(movieID);
 
         TextView reviewTitle = (TextView) findViewById(R.id.reviewTitle);
-        review = (EditText) findViewById(R.id.review);
+        mReview = (EditText) findViewById(R.id.review);
         reviewTitle.setText(movie.getTitle());
 
+        movieRating = (RatingBar) findViewById(R.id.movieRating);
 
-
-        currentReview = localStore.findReview(localStore.getCurrentAccount(), movieID);
+        currentReview = localStore.findReview(localStore.getCurrentAccount(), movie.getId());
         if (currentReview != null) {
-            review.setText(currentReview.getReview());
+            mReview.setText(currentReview.getReview());
             movieRating.setRating(currentReview.getRating());
         } else {
             currentReview = new Review();
@@ -70,7 +71,7 @@ public class ReviewActivity extends AppCompatActivity {
     }
 
     public void listenerForRatingBar() {
-        movieRating = (RatingBar) findViewById(R.id.movieRating);
+
         movieRating.setOnRatingBarChangeListener(
                 new RatingBar.OnRatingBarChangeListener() {
                     @Override
@@ -85,12 +86,11 @@ public class ReviewActivity extends AppCompatActivity {
     }
 
     public void submit() {
-        //arrylist of reviews for current movie
-        //reviews.add(movieRating.getRating(), review.getText(), user.getName(), user.getMajor();
 
-        currentReview.setReview(review.getText().toString());
+        currentReview.setReview(mReview.getText().toString());
         currentReview.setMajor(((User) localStore.getCurrentAccount()).getMajor());
         currentReview.setReviewer((User) localStore.getCurrentAccount());
+        currentReview.setMovie(movie);
         localStore.addReview(currentReview);
         Intent toMovieScreen = new Intent(this, HomeActivity.class);
         startActivity(toMovieScreen);

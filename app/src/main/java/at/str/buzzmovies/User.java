@@ -11,7 +11,7 @@ public class User extends Account {
      * Constructor for a new account.
      *
      * @param email    The account's email (cannot be changed)
-     * @param token The account's password
+     * @param token    The account's password
      * @param status   The account's status
      * @param name     The account holder's name
      * @param major    The account holder's major
@@ -25,7 +25,7 @@ public class User extends Account {
 
 
     /**
-     * Cunstructor for new user account
+     * Constructor for new user account
      * @param email The user's email
      * @param token The user's API token
      * @param name The user's name
@@ -37,7 +37,7 @@ public class User extends Account {
     }
 
     /**
-     * returns acount holder's major
+     * returns account holder's major
      * @return major
      */
     public String getMajor() {return major;}
@@ -50,13 +50,13 @@ public class User extends Account {
     public String getInterest() {return interest;}
 
     /**
-     * Change's account holder's major
+     * Changes account holder's major
      * @param newMajor the updates major
      */
     public void setMajor(String newMajor) {major = newMajor;}
 
     /**
-     * Change's account holder's interest
+     * Changes account holder's interest
      * @param newInterest the updates interest
      */
     public void setInterest(String newInterest) {interest = newInterest;}

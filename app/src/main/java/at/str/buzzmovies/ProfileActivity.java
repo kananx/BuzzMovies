@@ -1,5 +1,6 @@
 package at.str.buzzmovies;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 /**
@@ -22,11 +24,15 @@ public class ProfileActivity extends AppCompatActivity {
     private String interestStr;
     private String major;
     private String email;
+    private String newPass;
+    private String newPassC;
     private TextView mEmail;
     private EditText nameText;
     private TextView majorPromp;
     private EditText majorText;
     private EditText interests;
+    private EditText changePass;
+    private EditText confirmPass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,24 +58,44 @@ public class ProfileActivity extends AppCompatActivity {
         majorPromp = (TextView) findViewById(R.id.major_TextView);
         majorText = (EditText) findViewById(R.id.major_editText);
         interests = (EditText) findViewById(R.id.interests_editText);
+        changePass = (EditText) findViewById(R.id.changePass_editText);
+        confirmPass = (EditText) findViewById(R.id.confirmPass_editText);
 
         majorText.setText(user.getMajor());
         interests.setText(user.getInterest());
         nameText.setText(user.getName());
+        changePass.setText("");
+        confirmPass.setText("");
 
         Button mHomeButton = (Button) findViewById(R.id.home_button);
         mHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Set all of the fields in user
-                //retrieving name, might use in user.java
-                name = nameText.getText().toString();
-                //retreiving major
-                major = majorText.getText().toString();
-                //retrieving interest
-                interestStr = interests.getText().toString();
-                changeInformation();
-                toHome();
+                newPass = changePass.getText().toString();
+                newPassC = confirmPass.getText().toString();
+                if (!(newPass.equals(newPassC))) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Passwords do not match";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                } else if (newPass.length() > 0 && newPass.length() < 4) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Password must be at least 4 characters";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                } else {
+                    // Set all of the fields in user
+                    //retrieving name, might use in user.java
+                    name = nameText.getText().toString();
+                    //retrieving major
+                    major = majorText.getText().toString();
+                    //retrieving interest
+                    interestStr = interests.getText().toString();
+                    changeInformation();
+                    toHome();
+                }
             }
         });
 
@@ -80,6 +106,9 @@ public class ProfileActivity extends AppCompatActivity {
         user.setInterest(interestStr);
         user.setMajor(major);
         user.setName(name);
+        if (newPass.length() > 0) {
+            user.setPassword(newPass);
+        }
         localStore.setCurrentAccount(user);
     }
 

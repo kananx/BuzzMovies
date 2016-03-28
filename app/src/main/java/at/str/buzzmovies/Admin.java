@@ -10,12 +10,11 @@ public class Admin extends Account {
      *
      * @param email    The account's email (cannot be changed)
      * @param password The account's password
-     * @param status   The account's status
      * @param name     The account holder's name
      */
 
-    public Admin(String email, String password, String status, String name) {
-        super(email, password, status, name);
+    public Admin(String email, String password, String name) {
+        super(email, password, null, name);
     }
 
     @Override

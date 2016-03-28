@@ -47,7 +47,8 @@
     <!-- String for movie Screen -->
     <string name="reviewItButton">Rate it!</string>
     <string name="rateMovieTextView">Rate this movie</string>
-    <string name="title_activity_review">reviewActivity</string>
+    <string name="title_activity_review">Review Movie</string>
+    <string name="title_activity_admin">Change User Status</string>
 
     <!-- String for review movie -->
 

@@ -63,11 +63,26 @@
         <activity
             android:name=".MovieScreen"
             android:label="@string/title_activity_movie_screen"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:parentActivityName=".SearchableActivity"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="at.str.buzzmovies.SearchableActivity" />
+        </activity>
         <activity
             android:name=".ReviewActivity"
             android:label="@string/title_activity_review"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:parentActivityName=".MovieScreen"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="at.str.buzzmovies.MovieScreen" />
+        </activity>
+        <activity
+            android:name=".AdminActivity"
+            android:label="@string/title_activity_admin"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
     </application>
 
 </manifest>

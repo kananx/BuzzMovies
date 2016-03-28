@@ -78,6 +78,7 @@ public class HomeActivity extends AppCompatActivity {
      * Directs app to the LoginActivity page.
      */
     private void logout() {
+        localStore.setCurrentAccount(null);
         Intent toLoginActivity = new Intent(this, LoginActivity.class);
         startActivity(toLoginActivity);
     }

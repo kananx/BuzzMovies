@@ -38,6 +38,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mName.setText(mDataset.get(position).getName());
         holder.mName.setChecked(mDataset.get(position).getStatus().equals("banned"));
+        holder.mName.setTag(mDataset.get(position));
     }
 
     @Override

@@ -70,4 +70,43 @@ public class AccountController {
 
 
     }
+
+    public static void setAccountStatus(final Context context, Account account) {
+
+
+        RequestQueue queue = VolleyQueue.getInstance(context).
+                getRequestQueue();
+
+        String url = context.getString(R.string.api_base_url) + context.getString(R.string.api_get_accounts_route);
+
+        Map<String, String> parameters = new HashMap<String, String>();
+
+        parameters.put("email", account.getEmail());
+        parameters.put("status", account.getStatus());
+
+        final JSONObject params = new JSONObject(parameters);
+
+        JsonObjectRequest updateStatus = new JsonObjectRequest
+                (Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        Log.i("Admin", "Status Update Successful");
+                    }
+                }, new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        CharSequence text = context.getText(R.string.network_error_try);
+                        int duration = Toast.LENGTH_SHORT;
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
+                }) {
+
+
+        };
+
+        VolleyQueue.getInstance(context).addToRequestQueue(updateStatus);
+    }
 }

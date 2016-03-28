@@ -76,4 +76,15 @@ public class AdminActivity extends AppCompatActivity implements UserListCallback
         mUserList.setAdapter(mUserAdapter);
     }
 
+    public void handleBanAccountClick(View view) {
+        Account account = (Account) view.getTag();
+
+        if (account.getStatus().equals("banned")) {
+            account.setStatus("active");
+        } else if (account.getStatus().equals("active")) {
+            account.setStatus("banned");
+        }
+
+        AccountController.setAccountStatus(this.getApplicationContext(), account);
+    }
 }

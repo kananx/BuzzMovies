@@ -65,6 +65,33 @@
         android:layout_below="@+id/interest_TextView"
         android:layout_alignParentStart="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/changePass_profile_page"
+        android:id="@+id/changePass_TextView"
+        android:layout_below="@+id/interests_editText"
+        android:layout_alignParentStart="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/changePass_editText"
+        android:inputType="textPassword"
+        android:layout_below="@+id/changePass_TextView"
+        android:layout_alignParentStart="true"
+        android:hint="Enter New Password" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/confirmPass_editText"
+        android:inputType="textPassword"
+        android:layout_below="@+id/changePass_editText"
+        android:layout_alignParentStart="true"
+        android:hint="Confirm New Password" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

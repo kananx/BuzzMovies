@@ -83,7 +83,8 @@ public class LoginActivity extends AppCompatActivity {
      * @param password contents of password textfield
      */
     private void toRegister(String email, String password) {
-        //TODO: Put Extra Here
+        RegistrationScreen.defaultEmail = email;
+        RegistrationScreen.defaultPass = password;
         Intent toRegisterActivity = new Intent(this, RegistrationScreen.class);
         startActivity(toRegisterActivity);
     }

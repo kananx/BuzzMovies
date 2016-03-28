@@ -56,7 +56,7 @@ public abstract class Account {
     }
 
     /**
-     * Change's the account's password.
+     * Changes the account's password.
      * @param newPass The new password
      */
     public void setPassword(String newPass) {
@@ -64,7 +64,7 @@ public abstract class Account {
     }
 
     /**
-     * Change's the account's status.
+     * Changes the account's status.
      * @param newStatus The new status
      */
     public void setStatus(String newStatus) {
@@ -72,7 +72,7 @@ public abstract class Account {
     }
 
     /**
-     * Change's the account holder's name.
+     * Changes the account holder's name.
      * @param newName The new name
      */
     public void setName(String newName) {

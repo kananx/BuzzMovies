@@ -29,6 +29,7 @@
     <string name="major_profile_page">Major</string>
     <string name="interests">Movie Interests</string>
     <string name="return_button">Save</string>
+    <string name="changePass_profile_page">Change Password</string>
 
 
     <!-- Strings related to the API -->

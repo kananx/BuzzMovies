@@ -59,7 +59,10 @@ public class LoginController {
                             callee.startActivity(toHomeActivity);
 
                         } else {
-
+                            String errorMsg = response.getString("error");
+                            int duration = Toast.LENGTH_SHORT;
+                            Toast toast = Toast.makeText(context, errorMsg, duration);
+                            toast.show();
                         }
 
                     } catch (Exception e) {

@@ -6,13 +6,22 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class AdminActivity extends AppCompatActivity {
+import java.util.ArrayList;
+
+public class AdminActivity extends AppCompatActivity implements UserListCallback{
+    private RecyclerView mUserList;
+    private RecyclerView.Adapter mUserAdapter;
+    private RecyclerView.LayoutManager mUserListLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +32,15 @@ public class AdminActivity extends AppCompatActivity {
 
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mUserList = (RecyclerView) findViewById(R.id.user_list);
+        mUserList.setHasFixedSize(true);
+
+        mUserListLayout = new LinearLayoutManager(this);
+        mUserList.setLayoutManager(mUserListLayout);
+
+        AccountController.getAccountList(this.getApplicationContext(), this);
+
     }
 
     @Override
@@ -51,4 +69,11 @@ public class AdminActivity extends AppCompatActivity {
         Intent toLoginActivity = new Intent(this, LoginActivity.class);
         startActivity(toLoginActivity);
     }
+
+    public void populateUserList(ArrayList<Account> accounts) {
+        Log.i("Admin", "UserList Callback");
+        mUserAdapter = new UserAdapter(accounts);
+        mUserList.setAdapter(mUserAdapter);
+    }
+
 }

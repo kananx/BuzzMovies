@@ -3,7 +3,7 @@ package at.str.buzzmovies;
 /**
  * An abstract Account class used for creating users and admins.
  */
-public abstract class Account {
+public class Account {
     protected String email;
     protected String token;
     protected String status;

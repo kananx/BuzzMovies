@@ -31,7 +31,7 @@ public class AdminActivity extends AppCompatActivity implements UserListCallback
         setSupportActionBar(toolbar);
 
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
         mUserList = (RecyclerView) findViewById(R.id.user_list);
         mUserList.setHasFixedSize(true);

@@ -49,6 +49,10 @@ public class localStore {
         accounts.add(account);
     }
 
+    public static void clearAccounts() {
+        accounts.clear();
+    }
+
     public static ArrayList<Movie> getMovies() {
         return movies;
     }

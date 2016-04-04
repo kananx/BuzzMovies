@@ -110,6 +110,11 @@ public class ProfileActivity extends AppCompatActivity {
             user.setPassword(newPass);
         }
         localStore.setCurrentAccount(user);
+
+        // Now we have to go to ProfileController to also update the API
+        //Pass Credentials to profile controller for authentication
+
+        ProfileController.updateProfile(this.getApplicationContext(), this, interestStr, major, name);
     }
 
     private void toHome() {

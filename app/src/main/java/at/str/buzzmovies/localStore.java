@@ -30,7 +30,6 @@ public class localStore {
             }
         }
         return null;
-
     }
 
     public static void addReview (Review rev) {

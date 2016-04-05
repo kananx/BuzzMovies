@@ -12,16 +12,11 @@ import android.view.MenuItem;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.SearchView;
 
-import java.io.IOException;
-
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
 
 /**
  * Home activity page that allows the user to interact with available movies.
  * @author Delicious 3.14
- * @verion 1.0
+ * @version 1.0
  * @since 02-13-2016
  */
 public class HomeActivity extends AppCompatActivity {
@@ -33,8 +28,6 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar action_toolbar = (Toolbar) findViewById(R.id.action_toolbar);
         setSupportActionBar(action_toolbar);
 
-
-
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,14 +36,12 @@ public class HomeActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
-
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu optionMenu) {
         getMenuInflater().inflate(R.menu.options_menu, optionMenu);
-        // Associate searchable configuration with the SearchView"
+        // Associate searchable configuration with the SearchView
         MenuItem searchItem = optionMenu.findItem(R.id.search);
         SearchView mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         return true;
@@ -73,7 +64,6 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-
     /**
      * Directs app to the LoginActivity page.
      */
@@ -90,8 +80,4 @@ public class HomeActivity extends AppCompatActivity {
         Intent toProfileActivity = new Intent(this, ProfileActivity.class);
         startActivity(toProfileActivity);
     }
-
-    
-
-
 }

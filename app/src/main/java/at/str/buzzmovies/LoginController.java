@@ -24,7 +24,7 @@ public class LoginController {
         USER("user"), ADMIN("admin");
 
         private final String text;
-        private AccountType(String text) { this.text = text; }
+        AccountType(String text) { this.text = text; }
         public String getValue() { return text; }
     }
 
@@ -37,9 +37,6 @@ public class LoginController {
      * @return true if the user logged in successfully, false if the the username or password is incorrect
      */
     public static void login(final Context context, final Activity callee, final String email, final String password) {
-        RequestQueue queue = VolleyQueue.getInstance(context).
-                getRequestQueue();
-
         String url = context.getString(R.string.api_base_url) + context.getString(R.string.api_login_route);
 
         Map<String, String> parameters = new HashMap<String, String>();
@@ -59,8 +56,6 @@ public class LoginController {
                             String token = response.getString("token");
                             String name = response.getString("name");
 
-
-
                             if (response.getString("accountType").equals("user")) {
                                 localStore.setCurrentAccount(new User(email, token, name));
                                 Intent toHomeActivity = new Intent(callee, HomeActivity.class);
@@ -70,7 +65,6 @@ public class LoginController {
                                 Intent toAdminActivity = new Intent(callee, AdminActivity.class);
                                 callee.startActivity(toAdminActivity);
                             }
-
 
                         } else {
                             String errorMsg = response.getString("error");
@@ -82,8 +76,6 @@ public class LoginController {
                     } catch (Exception e) {
                         Log.w("Login", "Login parse Failed");
                     }
-
-
 
                 }
             }, new Response.ErrorListener() {
@@ -118,51 +110,47 @@ public class LoginController {
         final JSONObject params = new JSONObject(parameters);
 
         JsonObjectRequest regRequest = new JsonObjectRequest
-                (Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
+            (Request.Method.POST, url, params, new Response.Listener<JSONObject>() {
 
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        try {
-                            if (response.getString("login").equals("true")) {
-                                String token = response.getString("token");
+                @Override
+                public void onResponse(JSONObject response) {
+                    try {
+                        if (response.getString("login").equals("true")) {
+                            String token = response.getString("token");
 
-                                if (response.getString("accountType").equals("user")) {
-                                    localStore.setCurrentAccount(new User(email, token, null));
-                                    Intent toHomeActivity = new Intent(callee, HomeActivity.class);
-                                    callee.startActivity(toHomeActivity);
-                                } else if (response.getString("accountType").equals("admin")) {
-                                    localStore.setCurrentAccount(new Admin(email, token, null));
-                                    Intent toAdminActivity = new Intent(callee, AdminActivity.class);
-                                    callee.startActivity(toAdminActivity);
-                                }
-
-
-                            } else {
-                                String errorMsg = response.getString("error");
-                                int duration = Toast.LENGTH_SHORT;
-                                Toast toast = Toast.makeText(context, errorMsg, duration);
-                                toast.show();
+                            if (response.getString("accountType").equals("user")) {
+                                localStore.setCurrentAccount(new User(email, token, null));
+                                Intent toHomeActivity = new Intent(callee, HomeActivity.class);
+                                callee.startActivity(toHomeActivity);
+                            } else if (response.getString("accountType").equals("admin")) {
+                                localStore.setCurrentAccount(new Admin(email, token, null));
+                                Intent toAdminActivity = new Intent(callee, AdminActivity.class);
+                                callee.startActivity(toAdminActivity);
                             }
 
-                        } catch (Exception e) {
-                            Log.w("Login", "Register parse Failed");
+                        } else {
+                            String errorMsg = response.getString("error");
+                            int duration = Toast.LENGTH_SHORT;
+                            Toast toast = Toast.makeText(context, errorMsg, duration);
+                            toast.show();
                         }
+
+                    } catch (Exception e) {
+                        Log.w("Login", "Register parse Failed");
                     }
-                }, new Response.ErrorListener() {
+                }
+            }, new Response.ErrorListener() {
 
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        CharSequence text = context.getText(R.string.network_error_try);
-                        int duration = Toast.LENGTH_SHORT;
-                        Toast toast = Toast.makeText(context, text, duration);
-                        toast.show();
-                    }
-                }) {
-
-
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    CharSequence text = context.getText(R.string.network_error_try);
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
+            }) {
         };
 
         VolleyQueue.getInstance(context).addToRequestQueue(regRequest);
     }
-
 }

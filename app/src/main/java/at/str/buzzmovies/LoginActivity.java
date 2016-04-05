@@ -51,17 +51,14 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
-
-        Button mcancelLoginButton = (Button) findViewById(R.id.cancel_login_button);
-        mcancelLoginButton.setOnClickListener(new OnClickListener() {
+        Button mCancelLoginButton = (Button) findViewById(R.id.cancel_login_button);
+        mCancelLoginButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 mPasswordView.setText("");
                 mEmailView.setText("");
-
             }
         });
-
 
         Button mRegisterButton = (Button) findViewById(R.id.register_button);
         mRegisterButton.setOnClickListener(new View.OnClickListener() {
@@ -73,9 +70,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
-
-
-
 
     /**
      * Sends the app to the RegiserActivity.
@@ -89,15 +83,12 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(toRegisterActivity);
     }
 
-
-
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-
 
         // Reset errors.
         mEmailView.setError(null);
@@ -157,6 +148,5 @@ public class LoginActivity extends AppCompatActivity {
         //Password is checked server-side.
         return password.length() > 0;
     }
-
 }
 

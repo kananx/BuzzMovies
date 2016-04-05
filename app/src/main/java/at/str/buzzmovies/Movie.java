@@ -116,11 +116,7 @@ public class Movie {
     //holds the ratings and reviews that will be displayed in a listView
     ArrayList<Review> reviews = new ArrayList<>();
 
-
-
     public String toString() {
         return title + " [" + year + "], " + plot;
     }
-
-
 }

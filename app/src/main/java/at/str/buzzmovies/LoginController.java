@@ -55,9 +55,12 @@ public class LoginController {
                         if (response.getString("login").equals("true")) {
                             String token = response.getString("token");
                             String name = response.getString("name");
+                            String status = response.getString("status");
 
                             if (response.getString("accountType").equals("user")) {
-                                localStore.setCurrentAccount(new User(email, token, name));
+                                String interests = response.getString("interests");
+                                String major = response.getString("major");
+                                localStore.setCurrentAccount(new User(email, token, "active", name, major, interests));
                                 Intent toHomeActivity = new Intent(callee, HomeActivity.class);
                                 callee.startActivity(toHomeActivity);
                             } else if (response.getString("accountType").equals("admin")) {

@@ -55,6 +55,10 @@ public class Account {
         return name;
     }
 
+    public String getToken() {
+        return token;
+    }
+
     /**
      * Changes the account's password.
      * @param newPass The new password

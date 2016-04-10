@@ -15,6 +15,7 @@ public class Review {
     private String major;
     private Movie movie;
 
+   /*
     /**
      * create a rating object
      * @param rating number of stars
@@ -22,7 +23,7 @@ public class Review {
      * @param reviewer user who left review
      * @param major major of user who left review
      * @param movie movie that review is being left for
-     */
+
     public Review (float rating, String review,  User reviewer, String major, Movie movie) {
             this.rating = rating;
             this.reviewer = reviewer;
@@ -30,6 +31,7 @@ public class Review {
             this.review = review;
             this.movie = movie;
         }
+        */
 
     public Review() {}
 

@@ -20,14 +20,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by ryan on 3/28/16.
+ * Created by Ryan on 3/28/16.
  */
 public class AccountController {
+
+    /**
+     * Fetches list of accounts from server
+     * @param context context of current application
+     * @param callee Activity calling the function
+     */
     public static void getAccountList(final Context context, final Activity callee) {
-        RequestQueue queue = VolleyQueue.getInstance(context).getRequestQueue();
-
         String url = context.getString(R.string.api_base_url) + context.getString(R.string.api_get_accounts_route);
-
 
         JsonArrayRequest accountsRequest = new JsonArrayRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONArray>() {
@@ -64,19 +67,17 @@ public class AccountController {
                     }
                 }) {
 
-
         };
 
         VolleyQueue.getInstance(context).addToRequestQueue(accountsRequest);
-
-
     }
 
+    /**
+     * Updates account status on server
+     * @param context context of current application
+     * @param account account to be affected by the change
+     */
     public static void setAccountStatus(final Context context, Account account) {
-
-
-        RequestQueue queue = VolleyQueue.getInstance(context).
-                getRequestQueue();
 
         String url = context.getString(R.string.api_base_url) + context.getString(R.string.api_get_accounts_route);
 
@@ -104,7 +105,6 @@ public class AccountController {
                         toast.show();
                     }
                 }) {
-
 
         };
 

@@ -75,11 +75,7 @@ public class RegistrationScreen extends AppCompatActivity {
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
         } else {
-            User newUser = new User(email, password, "", "", "", "");
-            localStore.setCurrentAccount(newUser);
-            User user = (User) localStore.getCurrentAccount();
-            Intent toHomeActivity = new Intent(this, HomeActivity.class);
-            startActivity(toHomeActivity);
+            LoginController.register(this.getApplicationContext(), this, email, password, LoginController.AccountType.USER);
         }
     }
 }

@@ -70,11 +70,16 @@ public class AdminActivity extends AppCompatActivity implements UserListCallback
         startActivity(toLoginActivity);
     }
 
+    /**
+     * Populates the UI with a list of user accounts
+     * @param accounts List of accounts that should be displayed in the UI
+     */
     public void populateUserList(ArrayList<Account> accounts) {
         Log.i("Admin", "UserList Callback");
         mUserAdapter = new UserAdapter(accounts);
         mUserList.setAdapter(mUserAdapter);
     }
+
 
     public void handleBanAccountClick(View view) {
         Account account = (Account) view.getTag();

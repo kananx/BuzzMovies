@@ -40,14 +40,6 @@ public class ProfileActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
 
         user = (User) localStore.getCurrentAccount();
 
@@ -71,6 +63,25 @@ public class ProfileActivity extends AppCompatActivity {
         mHomeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                    // Set all of the fields in user
+                    //retrieving name, might use in user.java
+                    name = nameText.getText().toString();
+                    //retrieving major
+                    major = majorText.getText().toString();
+                    //retrieving interest
+                    interestStr = interests.getText().toString();
+                    changeInformation();
+                    toHome();
+
+            }
+        });
+
+        Button mChangePasswordButton = (Button) findViewById(R.id.change_password_button);
+        mChangePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //TODO: Actually make this method check the passwords then change them in the database. Below is some of the old code
                 newPass = changePass.getText().toString();
                 newPassC = confirmPass.getText().toString();
                 if (!(newPass.equals(newPassC))) {
@@ -86,15 +97,7 @@ public class ProfileActivity extends AppCompatActivity {
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
                 } else {
-                    // Set all of the fields in user
-                    //retrieving name, might use in user.java
-                    name = nameText.getText().toString();
-                    //retrieving major
-                    major = majorText.getText().toString();
-                    //retrieving interest
-                    interestStr = interests.getText().toString();
-                    changeInformation();
-                    toHome();
+
                 }
             }
         });
@@ -110,6 +113,11 @@ public class ProfileActivity extends AppCompatActivity {
             user.setPassword(newPass);
         }
         localStore.setCurrentAccount(user);
+
+        // Now we have to go to ProfileController to also update the API
+        //Pass Credentials to profile controller for authentication
+
+        ProfileController.updateProfile(this.getApplicationContext(), this, interestStr, major, name, localStore.getCurrentAccount().getToken());
     }
 
     private void toHome() {

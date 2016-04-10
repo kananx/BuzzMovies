@@ -13,6 +13,8 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="api_login_route">"/user/login"</string>
+    <string name="api_register_route">"/user/register"</string>
+    <string name="api_profile_route">"/user"</string>
     
     
     <string name="permission_rationale">"Contacts permissions are needed for providing email
@@ -28,8 +30,9 @@
     <string name="email_profile_page">Email will go here</string>
     <string name="major_profile_page">Major</string>
     <string name="interests">Movie Interests</string>
-    <string name="return_button">Save</string>
+    <string name="return_button">Save Changes</string>
     <string name="changePass_profile_page">Change Password</string>
+    <string name="change_password_button_text">Confirm Password Change</string>
 
 
     <!-- Strings related to the API -->

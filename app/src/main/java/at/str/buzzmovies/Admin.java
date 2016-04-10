@@ -17,12 +17,4 @@ public class Admin extends Account {
         super(email, password, null, name);
     }
 
-    @Override
-    /**
-     * Returns admins information
-     * @return admin's information
-     */
-    public String toString() {return  email + " (" + name + "), " + status;}
-
-
 }

@@ -10,17 +10,28 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
 
+/**
+ * handles the queue for HTTP requests via Volley
+ */
 public class VolleyQueue {
     private static VolleyQueue mInstance;
     private RequestQueue mRequestQueue;
-    private ImageLoader mImageLoader;
+    private final ImageLoader mImageLoader;
     private static Context mCtx;
 
 
+    /**
+     * creates the only queue for the request
+     * @return instance of queue
+     */
     public static VolleyQueue getInstance() {
         return mInstance;
     }
 
+    /**
+     * handles request
+     * @param context current context
+     */
     private VolleyQueue(Context context) {
         mCtx = context;
         mRequestQueue = getRequestQueue();
@@ -28,7 +39,7 @@ public class VolleyQueue {
         mImageLoader = new ImageLoader(mRequestQueue,
             new ImageLoader.ImageCache() {
                 private final LruCache<String, Bitmap>
-                        cache = new LruCache<String, Bitmap>(20);
+                        cache = new LruCache<>(20);
 
                 @Override
                 public Bitmap getBitmap(String url) {
@@ -42,6 +53,11 @@ public class VolleyQueue {
             });
         }
 
+    /**
+     * synchronizes Volley Singleton
+     * @param context current context
+     * @return volley Singleton
+     */
     public static synchronized VolleyQueue getInstance(Context context) {
         if (mInstance == null) {
             mInstance = new VolleyQueue(context);
@@ -49,6 +65,10 @@ public class VolleyQueue {
         return mInstance;
     }
 
+    /**
+     * gets request queue
+     * @return request queue
+     */
     public RequestQueue getRequestQueue() {
         if (mRequestQueue == null) {
             // getApplicationContext() is key, it keeps you from leaking the
@@ -58,10 +78,17 @@ public class VolleyQueue {
         return mRequestQueue;
     }
 
+    /**
+     * adds request to the queue
+     */
     public <T> void addToRequestQueue(Request<T> req) {
         getRequestQueue().add(req);
     }
 
+    /**
+     * gets ImageLoader
+     * @return image loader
+     */
     public ImageLoader getImageLoader() {
         return mImageLoader;
     }

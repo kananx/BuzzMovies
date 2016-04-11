@@ -1,11 +1,12 @@
 package at.str.buzzmovies;
 
 /**
- * Class to make User Account @inherits
+ * User account that can use the application features
+ * @inheritDoc Account.java
  */
 public class User extends Account {
-    protected String major;
-    protected String interest;
+    private String major;
+    private String interest;
 
     /**
      * Constructor for a new account.

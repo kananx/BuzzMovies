@@ -34,12 +34,12 @@ public class LoginController {
      * @param callee reference to activity that called this function.
      * @param email Email address of the user
      * @param password Password of the user
-     * @return true if the user logged in successfully, false if the the username or password is incorrect
+     * true if the user logged in successfully, false if the the username or password is incorrect
      */
     public static void login(final Context context, final Activity callee, final String email, final String password) {
         String url = context.getString(R.string.api_base_url) + context.getString(R.string.api_login_route);
 
-        Map<String, String> parameters = new HashMap<String, String>();
+        Map<String, String> parameters = new HashMap<>();
 
         parameters.put("email", email);
         parameters.put("password", password);
@@ -104,7 +104,7 @@ public class LoginController {
 
         String url = context.getString(R.string.api_base_url) + context.getString(R.string.api_register_route);
 
-        Map<String, String> parameters = new HashMap<String, String>();
+        Map<String, String> parameters = new HashMap<>();
 
         parameters.put("email", email);
         parameters.put("password", password);

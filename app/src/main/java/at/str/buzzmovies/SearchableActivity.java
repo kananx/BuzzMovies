@@ -1,6 +1,6 @@
 package at.str.buzzmovies;
 
-import android.net.NetworkInfo;
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,36 +23,33 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Map;
 
-
-import static android.support.v4.media.session.MediaButtonReceiver.handleIntent;
-
+/**
+ * handles the logic for creating a search query using the search bar
+ */
 public class SearchableActivity extends AppCompatActivity {
 
     private static final String TAG = SearchableActivity.class.getSimpleName();
     private TextView msearchResults;
     private final Gson gson = new Gson();
-    private RequestQueue queue;
     private String response;
 
     private RecyclerView mRecylerView;
-    private RecyclerView.Adapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
 
 
+    /**
+     * creates the UI elements
+     * @param savedInstanceState current state of the instance
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        queue = Volley.newRequestQueue(this);
+        RequestQueue queue = Volley.newRequestQueue(this);
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -70,13 +67,17 @@ public class SearchableActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_results);
         mRecylerView = (RecyclerView) findViewById(R.id.searchResultsRecyclerView);
 
-        mLayoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecylerView.setLayoutManager(mLayoutManager);
 
 
 
     }
 
+    /**
+     * delegates task when new intent is passed
+     * @param intent operation to be performed
+     */
     @Override
     protected void onNewIntent(Intent intent) {
         Log.i(TAG, "in onNewIntent");
@@ -84,6 +85,11 @@ public class SearchableActivity extends AppCompatActivity {
         handleIntent(intent);
     }
 
+
+    /**
+     * creates search query
+     * @param intent operation to be performed
+     */
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
@@ -91,12 +97,19 @@ public class SearchableActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * populates the recycler view of Movies that match search query
+     */
     private void populateMovieList() {
-        mAdapter = new MovieListAdapter(localStore.getMovies());
+        RecyclerView.Adapter mAdapter = new MovieListAdapter(localStore.getMovies());
         mRecylerView.setAdapter(mAdapter);
     }
 
-    public void doSearchQuery(String query) {
+    /**
+     * talks to OMDB API with current search query
+     * @param query the keywords that are being searched
+     */
+    private void doSearchQuery(String query) {
 
         //this is the URL for our REST service
         String url = "http://omdbapi.com/?type=movie&s=" + query;

@@ -23,12 +23,9 @@ public class ProfileActivity extends AppCompatActivity {
     private String name;
     private String interestStr;
     private String major;
-    private String email;
     private String newPass;
     private String newPassC;
-    private TextView mEmail;
     private EditText nameText;
-    private TextView majorPromp;
     private EditText majorText;
     private EditText interests;
     private EditText changePass;
@@ -43,11 +40,11 @@ public class ProfileActivity extends AppCompatActivity {
 
         user = (User) localStore.getCurrentAccount();
 
-        mEmail = (TextView) findViewById(R.id.email_textView);
+        TextView mEmail = (TextView) findViewById(R.id.email_textView);
         mEmail.setText(user.getEmail());
-        email = mEmail.getText().toString();
+        String email = mEmail.getText().toString();
         nameText = (EditText) findViewById(R.id.name_editText);
-        majorPromp = (TextView) findViewById(R.id.major_TextView);
+        TextView majorPromp = (TextView) findViewById(R.id.major_TextView);
         majorText = (EditText) findViewById(R.id.major_editText);
         interests = (EditText) findViewById(R.id.interests_editText);
         changePass = (EditText) findViewById(R.id.changePass_editText);

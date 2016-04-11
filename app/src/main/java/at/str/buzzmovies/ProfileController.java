@@ -27,7 +27,7 @@ public class ProfileController {
         USER("user"), ADMIN("admin");
 
         private final String text;
-        private AccountType(String text) { this.text = text; }
+        AccountType(String text) { this.text = text; }
         public String getValue() { return text; }
     }
 
@@ -38,13 +38,13 @@ public class ProfileController {
      * @param interestStr The interest to update the profile to.
      * @param major The major to update the profile to
      * @param name The name to update the profile to
-     * @return true if the user logged in successfully, false if the the username or password is incorrect
+     * true if the user logged in successfully, false if the the username or password is incorrect
      */
     public static void updateProfile(final Context context, final Activity callee, final String interestStr, final String major, final String name, final String token) {
         //TODO: Create api_updateProfile_route in the strings.xml file
         String url = context.getString(R.string.api_base_url) + context.getString(R.string.api_profile_route);
 
-        Map<String, String> parameters = new HashMap<String, String>();
+        Map<String, String> parameters = new HashMap<>();
         parameters.put("token", token);
         parameters.put("name", name);
         parameters.put("major", major);

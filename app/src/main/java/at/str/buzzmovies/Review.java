@@ -21,9 +21,9 @@ public class Review {
             this.movie = movie;
         }
 
-        public Review() {};
+        public Review() {}
 
-        public void setRating(float rating) { this.rating = rating;}
+    public void setRating(float rating) { this.rating = rating;}
 
         public void setReview(String review) {this.review = review;}
 

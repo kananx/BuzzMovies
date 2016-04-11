@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
      * If there are form errors (invalid email, missing fields, etc.), the
      * errors are presented and no actual login attempt is made.
      */
-    private void attemptLogin() {
+    protected void attemptLogin() {
 
         // Reset errors.
         mEmailView.setError(null);
@@ -134,7 +134,7 @@ public class LoginActivity extends AppCompatActivity {
      * @param email The input email address from the text field
      * @return True/False if the email is valid
      */
-    private boolean isEmailValid(String email) {
+    protected boolean isEmailValid(String email) {
         //TODO: Replace this a regex match
         return email.contains("@");
     }

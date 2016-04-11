@@ -54,6 +54,9 @@
     <!-- String for review movie -->
     <string name="title_activity_review">Review Movie</string>
 
+    <!-- String for account controller -->
+    <string name="admin_tag">Admin</string>
+
     <!-- Strings for Admin Page -->
     <string name="title_activity_admin">Banned Accounts</string>
     <string name="api_get_accounts_route">/account</string>

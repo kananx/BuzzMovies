@@ -101,7 +101,7 @@ public class SearchableActivity extends AppCompatActivity {
      * populates the recycler view of Movies that match search query
      */
     private void populateMovieList() {
-        RecyclerView.Adapter mAdapter = new MovieListAdapter(localStore.getMovies());
+        RecyclerView.Adapter mAdapter = new MovieListAdapter(LocalStore.getMovies());
         mRecylerView.setAdapter(mAdapter);
     }
 
@@ -113,7 +113,7 @@ public class SearchableActivity extends AppCompatActivity {
 
         //this is the URL for our REST service
         String url = "http://omdbapi.com/?type=movie&s=" + query;
-        localStore.clearMovies();
+        LocalStore.clearMovies();
 
         JsonObjectRequest jsObjRequest = new JsonObjectRequest
                 (Request.Method.GET, url, null, new Response.Listener<JSONObject>() {
@@ -126,9 +126,9 @@ public class SearchableActivity extends AppCompatActivity {
                                 String title = current.getString("Title");
                                 int year = Integer.parseInt(current.getString("Year"));
                                 String id = current.getString("imdbID");
-                                localStore.addMovie(new Movie(title,"",year,"",id));
+                                LocalStore.addMovie(new Movie(title,"",year,"",id));
                             }
-                            Log.i("Network", "Movies Found: " + localStore.getMovies().size());
+                            Log.i("Network", "Movies Found: " + LocalStore.getMovies().size());
 
                         } catch (Exception e) {
                             Log.e("Network", "Error Parsing JSON");

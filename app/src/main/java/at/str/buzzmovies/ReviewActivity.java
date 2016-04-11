@@ -45,7 +45,7 @@ public class ReviewActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String movieID = intent.getStringExtra(MovieScreen.MOVIE_ID);
-        movie = localStore.getMovieByID(movieID);
+        movie = LocalStore.getMovieByID(movieID);
 
         TextView reviewTitle = (TextView) findViewById(R.id.reviewTitle);
         mReview = (EditText) findViewById(R.id.review);
@@ -53,7 +53,7 @@ public class ReviewActivity extends AppCompatActivity {
 
         movieRating = (RatingBar) findViewById(R.id.movieRating);
 
-        currentReview = localStore.findReview(localStore.getCurrentAccount(), movie.getId());
+        currentReview = LocalStore.findReview(LocalStore.getCurrentAccount(), movie.getId());
         if (currentReview != null) {
             mReview.setText(currentReview.getReview());
             movieRating.setRating(currentReview.getRating());
@@ -97,10 +97,10 @@ public class ReviewActivity extends AppCompatActivity {
     private void submit() {
 
         currentReview.setReview(mReview.getText().toString());
-        currentReview.setMajor(((User) localStore.getCurrentAccount()).getMajor());
-        currentReview.setReviewer((User) localStore.getCurrentAccount());
+        currentReview.setMajor(((User) LocalStore.getCurrentAccount()).getMajor());
+        currentReview.setReviewer((User) LocalStore.getCurrentAccount());
         currentReview.setMovie(movie);
-        localStore.addReview(currentReview);
+        LocalStore.addReview(currentReview);
         Intent toMovieScreen = new Intent(this, HomeActivity.class);
         startActivity(toMovieScreen);
 

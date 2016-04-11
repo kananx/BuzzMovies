@@ -20,18 +20,17 @@ import android.widget.Toast;
  */
 public class ProfileActivity extends AppCompatActivity {
     protected User user;
-    private String name;
-    private String interestStr;
-    private String major;
-    private String newPass;
-    private String newPassC;
-    private TextView mEmail;
-    private TextView majorPromp;
-    private EditText nameText;
-    private EditText majorText;
-    private EditText interests;
-    private EditText changePass;
-    private EditText confirmPass;
+    protected String name;
+    protected String interestStr;
+    protected String major;
+    protected String newPass;
+    protected String newPassC;
+    protected EditText nameText;
+    protected EditText majorText;
+    protected EditText interests;
+    protected EditText changePass;
+    protected EditText confirmPass;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        user = (User) localStore.getCurrentAccount();
+        user = (User) LocalStore.getCurrentAccount();
 
         TextView mEmail = (TextView) findViewById(R.id.email_textView);
         mEmail.setText(user.getEmail());
@@ -104,20 +103,23 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    public void changeInformation() {
+
+    protected void changeInformation() {
         user.setInterest(interestStr);
         user.setMajor(major);
         user.setName(name);
-        /*if (newPass.length() > 0) {
-            user.setPassword(newPass);
-        }
-        */
-        localStore.setCurrentAccount(user);
+        //if (newPass.length() > 0) {
+          //  user.setPassword(newPass);
+       // }
+        LocalStore.setCurrentAccount(user);
+
 
         // Now we have to go to ProfileController to also update the API
         //Pass Credentials to profile controller for authentication
 
+
         //ProfileController.updateProfile(this.getApplicationContext(), this, interestStr, major, name, localStore.getCurrentAccount().getToken());
+
     }
 
     private void toHome() {

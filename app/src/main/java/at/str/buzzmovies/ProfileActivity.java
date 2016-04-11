@@ -19,17 +19,17 @@ import android.widget.Toast;
  * @author Delicous 3.14
  */
 public class ProfileActivity extends AppCompatActivity {
-    private User user;
-    private String name;
-    private String interestStr;
-    private String major;
-    private String newPass;
-    private String newPassC;
-    private EditText nameText;
-    private EditText majorText;
-    private EditText interests;
-    private EditText changePass;
-    private EditText confirmPass;
+    protected User user;
+    protected String name;
+    protected String interestStr;
+    protected String major;
+    protected String newPass;
+    protected String newPassC;
+    protected EditText nameText;
+    protected EditText majorText;
+    protected EditText interests;
+    protected EditText changePass;
+    protected EditText confirmPass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -102,19 +102,19 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    private void changeInformation() {
+    protected void changeInformation() {
         user.setInterest(interestStr);
         user.setMajor(major);
         user.setName(name);
-        if (newPass.length() > 0) {
-            user.setPassword(newPass);
-        }
+        //if (newPass.length() > 0) {
+          //  user.setPassword(newPass);
+       // }
         LocalStore.setCurrentAccount(user);
 
         // Now we have to go to ProfileController to also update the API
         //Pass Credentials to profile controller for authentication
 
-        ProfileController.updateProfile(this.getApplicationContext(), this, interestStr, major, name, LocalStore.getCurrentAccount().getToken());
+        //ProfileController.updateProfile(this.getApplicationContext(), this, interestStr, major, name, LocalStore.getCurrentAccount().getToken());
     }
 
     private void toHome() {

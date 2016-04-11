@@ -19,12 +19,14 @@ import android.widget.Toast;
  * @author Delicous 3.14
  */
 public class ProfileActivity extends AppCompatActivity {
-    private User user;
+    protected User user;
     private String name;
     private String interestStr;
     private String major;
     private String newPass;
     private String newPassC;
+    private TextView mEmail;
+    private TextView majorPromp;
     private EditText nameText;
     private EditText majorText;
     private EditText interests;
@@ -102,19 +104,20 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    private void changeInformation() {
+    public void changeInformation() {
         user.setInterest(interestStr);
         user.setMajor(major);
         user.setName(name);
-        if (newPass.length() > 0) {
+        /*if (newPass.length() > 0) {
             user.setPassword(newPass);
         }
+        */
         localStore.setCurrentAccount(user);
 
         // Now we have to go to ProfileController to also update the API
         //Pass Credentials to profile controller for authentication
 
-        ProfileController.updateProfile(this.getApplicationContext(), this, interestStr, major, name, localStore.getCurrentAccount().getToken());
+        //ProfileController.updateProfile(this.getApplicationContext(), this, interestStr, major, name, localStore.getCurrentAccount().getToken());
     }
 
     private void toHome() {

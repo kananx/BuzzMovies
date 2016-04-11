@@ -21,10 +21,10 @@ public class EmailValidUnitTest {
 
     @Test
     public void testEmailContainsAt() {
+
         loginActivity = new LoginActivity();
         String a = "user@example.com";
         assertEquals(loginActivity.isEmailValid(a), true);
     }
-
 
 }

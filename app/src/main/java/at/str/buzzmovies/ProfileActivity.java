@@ -31,6 +31,10 @@ public class ProfileActivity extends AppCompatActivity {
     protected EditText changePass;
     protected EditText confirmPass;
 
+    /**
+     * onCreate method
+     * @param savedInstanceState Instance state of type Bundle
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +63,10 @@ public class ProfileActivity extends AppCompatActivity {
 
         Button mHomeButton = (Button) findViewById(R.id.home_button);
         mHomeButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick method
+             * @param view view of type View
+             */
             @Override
             public void onClick(View view) {
 
@@ -77,6 +85,10 @@ public class ProfileActivity extends AppCompatActivity {
 
         Button mChangePasswordButton = (Button) findViewById(R.id.change_password_button);
         mChangePasswordButton.setOnClickListener(new View.OnClickListener() {
+            /**
+             * onClick method
+             * @param view view of type view
+             */
             @Override
             public void onClick(View view) {
                 //TODO: Actually make this method check the passwords then change them in the database. Below is some of the old code
@@ -104,6 +116,9 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * Change Information method of interest, major, and name.
+     */
     protected void changeInformation() {
         user.setInterest(interestStr);
         user.setMajor(major);
@@ -122,6 +137,9 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * private method to go to Home activity.
+     */
     private void toHome() {
         Intent toHomeActivity = new Intent(this, HomeActivity.class);
         startActivity(toHomeActivity);

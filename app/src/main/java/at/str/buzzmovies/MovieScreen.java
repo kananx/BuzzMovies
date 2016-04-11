@@ -12,6 +12,9 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+/**
+ * Movie Screen class that extends AppCompatActivity
+ */
 public class MovieScreen extends AppCompatActivity {
     public final static String MOVIE_ID = "at.str.buzzmovies.MESSAGE";
     Movie currentMovie;
@@ -58,6 +61,10 @@ public class MovieScreen extends AppCompatActivity {
     }
 
 
+    /**
+     * review method to review a movie
+     * @param movieID takes in movie id as a string
+     */
     public void review(String movieID) {
         Intent toReviewActivity = new Intent(this, ReviewActivity.class);
         toReviewActivity.putExtra(MOVIE_ID, movieID);

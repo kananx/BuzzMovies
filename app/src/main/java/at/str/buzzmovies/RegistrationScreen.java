@@ -20,6 +20,10 @@ public class RegistrationScreen extends AppCompatActivity {
     EditText mPasswordView;
     EditText mConfirmPasswordView;
 
+    /**
+     * Oncreate method using savedInstanceState
+     * @param savedInstanceState variable of type Bundle for oncreate
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +62,10 @@ public class RegistrationScreen extends AppCompatActivity {
         Intent toLoginActivity = new Intent(this, LoginActivity.class);
         startActivity(toLoginActivity);
     }
+
+    /**
+     * registers user using email, password and confirmed password.
+     */
     private void register() {
         String email = mEmail.getText().toString();
         String password = mPasswordView.getText().toString();

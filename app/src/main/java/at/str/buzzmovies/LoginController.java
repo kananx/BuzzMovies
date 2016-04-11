@@ -98,6 +98,15 @@ public class LoginController {
         VolleyQueue.getInstance(context).addToRequestQueue(loginRequest);
     }
 
+    /**
+     * Takes in context, callee, email, password and type to register account
+     * @param context Current application context.
+     * @param callee reference to activity
+     * @param email email used to register
+     * @param password password for registration
+     * @param type type of account
+     */
+
     public static void register(final Context context, final Activity callee, final String email, final String password, AccountType type) {
         RequestQueue queue = VolleyQueue.getInstance(context).
                 getRequestQueue();

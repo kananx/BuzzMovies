@@ -110,4 +110,19 @@ public class AccountController {
 
         VolleyQueue.getInstance(context).addToRequestQueue(updateStatus);
     }
+
+    /**
+     * The method to test the validity of an entered passwrod - NOT if it is the correct password for an account
+     * @param password The password that was entered into the text field
+     * @return True is the password matches the requirements, False if it doesn't.
+     */
+    public static boolean isPasswordValid2(String password) {
+        if ((password != null) && (password.length() >= 7)) {
+            //Regex match for an upper and lowercase letter
+            return password.matches("^(?=.*[a-z])(?=.*[A-Z]).+$");
+        } else {
+            //Remember that, if this fails to display a toast
+            return false;
+        }
+    }
 }

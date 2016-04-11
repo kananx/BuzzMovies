@@ -148,5 +148,6 @@ public class LoginActivity extends AppCompatActivity {
         //Password is checked server-side.
         return password.length() > 0;
     }
+
 }
 

@@ -82,13 +82,29 @@ public class AdminActivity extends AppCompatActivity implements UserListCallback
      */
     public void handleBanAccountClick(View view) {
         final Account account = (Account) view.getTag();
+        account.setStatus(toggleStatus(account.getStatus()));
+        AccountController.setAccountStatus(this.getApplicationContext(), account);
+    }
 
-        if ("banned".equals(account.getStatus())) {
-            account.setStatus("active");
-        } else if ("active".equals(account.getStatus())) {
-            account.setStatus("banned");
+
+    /**
+     * Toggles account status between active an banned
+     * @param status status. Either "active" or "banned"
+     * @return returns the opposite of what was passed in. Null if input is invalid
+     * @throws NullPointerException If input String is null
+     */
+    public String toggleStatus(String status) {
+        if (status == null) {
+            throw new NullPointerException("Status string can't be null");
         }
 
-        AccountController.setAccountStatus(this.getApplicationContext(), account);
+        switch(status) {
+            case ("banned"):
+                return "active";
+            case ("active"):
+                return "banned";
+            default:
+                return null;
+        }
     }
 }

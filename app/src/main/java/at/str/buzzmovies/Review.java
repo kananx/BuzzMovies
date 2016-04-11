@@ -121,11 +121,11 @@ public class Review {
      */
     public Movie getMovie() {return movie;}
 
-    @Override
+
     /**
      * formatted String containing the attributes of a review
      */
-
+    @Override
     public String toString() {
         return reviewer + "gave this movie " + rating + " stars, and said" + review;
     }

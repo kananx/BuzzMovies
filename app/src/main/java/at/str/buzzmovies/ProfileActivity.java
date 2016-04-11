@@ -38,7 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
-        user = (User) localStore.getCurrentAccount();
+        user = (User) LocalStore.getCurrentAccount();
 
         TextView mEmail = (TextView) findViewById(R.id.email_textView);
         mEmail.setText(user.getEmail());
@@ -109,12 +109,12 @@ public class ProfileActivity extends AppCompatActivity {
         if (newPass.length() > 0) {
             user.setPassword(newPass);
         }
-        localStore.setCurrentAccount(user);
+        LocalStore.setCurrentAccount(user);
 
         // Now we have to go to ProfileController to also update the API
         //Pass Credentials to profile controller for authentication
 
-        ProfileController.updateProfile(this.getApplicationContext(), this, interestStr, major, name, localStore.getCurrentAccount().getToken());
+        ProfileController.updateProfile(this.getApplicationContext(), this, interestStr, major, name, LocalStore.getCurrentAccount().getToken());
     }
 
     private void toHome() {

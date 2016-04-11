@@ -60,11 +60,11 @@ public class LoginController {
                             if (response.getString("accountType").equals("user")) {
                                 String interests = response.getString("interests");
                                 String major = response.getString("major");
-                                localStore.setCurrentAccount(new User(email, token, "active", name, major, interests));
+                                LocalStore.setCurrentAccount(new User(email, token, "active", name, major, interests));
                                 Intent toHomeActivity = new Intent(callee, HomeActivity.class);
                                 callee.startActivity(toHomeActivity);
                             } else if (response.getString("accountType").equals("admin")) {
-                                localStore.setCurrentAccount(new Admin(email, token, name));
+                                LocalStore.setCurrentAccount(new Admin(email, token, name));
                                 Intent toAdminActivity = new Intent(callee, AdminActivity.class);
                                 callee.startActivity(toAdminActivity);
                             }
@@ -122,11 +122,11 @@ public class LoginController {
                             String token = response.getString("token");
 
                             if (response.getString("accountType").equals("user")) {
-                                localStore.setCurrentAccount(new User(email, token, null));
+                                LocalStore.setCurrentAccount(new User(email, token, null));
                                 Intent toHomeActivity = new Intent(callee, HomeActivity.class);
                                 callee.startActivity(toHomeActivity);
                             } else if (response.getString("accountType").equals("admin")) {
-                                localStore.setCurrentAccount(new Admin(email, token, null));
+                                LocalStore.setCurrentAccount(new Admin(email, token, null));
                                 Intent toAdminActivity = new Intent(callee, AdminActivity.class);
                                 callee.startActivity(toAdminActivity);
                             }

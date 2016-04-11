@@ -4,23 +4,35 @@ package at.str.buzzmovies;
  * An abstract Account class used for creating users and admins.
  */
 public class Account {
+    /**
+     * The account's email (cannot be changed)
+     */
     protected String email;
+    /**
+     * The account's password
+     */
     protected String token;
+    /**
+     * The account's status
+     */
     protected String status;
+    /**
+     * The account holder's name
+     */
     protected String name;
 
     /**
      * Constructor for a new account.
-     * @param email The account's email (cannot be changed)
-     * @param token The account's password
-     * @param status The account's status
-     * @param name The account holder's name
+     * @param newEmail The account's email (cannot be changed)
+     * @param newToken The account's password
+     * @param newStatus The account's status
+     * @param newName The account holder's name
      */
-    public Account(String email, String token, String status, String name) {
-        this.email = email;
-        this.token = token;
-        this.status = status;
-        this.name = name;
+    public Account(String newEmail, String newToken, String newStatus, String newName) {
+        email = newEmail;
+        token = newToken;
+        status = newStatus;
+        name = newName;
     }
 
     /**
@@ -55,6 +67,10 @@ public class Account {
         return name;
     }
 
+    /**
+     * Returns the account holder's token (password)
+     * @return token
+     */
     public String getToken() {
         return token;
     }

@@ -33,7 +33,7 @@ public class MovieScreen extends AppCompatActivity {
 
         Intent intent = getIntent();
         int moviePosition = intent.getIntExtra(MovieListAdapter.MOVIE_POSITION, 0);
-        currentMovie = localStore.getMovies().get(moviePosition);
+        currentMovie = LocalStore.getMovies().get(moviePosition);
 
 
         TextView movieTitle = (TextView) findViewById(R.id.movieTitle);

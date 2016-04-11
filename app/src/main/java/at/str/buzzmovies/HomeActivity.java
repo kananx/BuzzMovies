@@ -9,8 +9,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.support.v4.view.MenuItemCompat;
-import android.support.v7.widget.SearchView;
 
 
 /**
@@ -25,10 +23,10 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar action_toolbar = (Toolbar) findViewById(R.id.action_toolbar);
-        setSupportActionBar(action_toolbar);
+        final Toolbar actionToolbar = (Toolbar) findViewById(R.id.action_toolbar);
+        setSupportActionBar(actionToolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -42,8 +40,6 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu optionMenu) {
         getMenuInflater().inflate(R.menu.options_menu, optionMenu);
         // Associate searchable configuration with the SearchView
-        MenuItem searchItem = optionMenu.findItem(R.id.search);
-        SearchView mSearchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         return true;
     }
 
@@ -68,8 +64,8 @@ public class HomeActivity extends AppCompatActivity {
      * Directs app to the LoginActivity page.
      */
     private void logout() {
-        localStore.setCurrentAccount(null);
-        Intent toLoginActivity = new Intent(this, LoginActivity.class);
+        LocalStore.setCurrentAccount(null);
+        final Intent toLoginActivity = new Intent(this, LoginActivity.class);
         startActivity(toLoginActivity);
     }
 
@@ -77,7 +73,7 @@ public class HomeActivity extends AppCompatActivity {
      * Directs app to the ProfileActivity page.
      */
     private void profile() {
-        Intent toProfileActivity = new Intent(this, ProfileActivity.class);
+        final Intent toProfileActivity = new Intent(this, ProfileActivity.class);
         startActivity(toProfileActivity);
     }
 }

@@ -67,5 +67,5 @@ public class User extends Account {
      * Returns users information
      * @return user's information
      */
-    public String toString() {return  email + " (" + name + "), " + status + ", " + major + ", " + interest;}
+    public String toString() {return email + " (" + name + "), " + status + ", " + major + ", " + interest;}
 }

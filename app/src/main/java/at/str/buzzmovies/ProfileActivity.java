@@ -133,7 +133,7 @@ public class ProfileActivity extends AppCompatActivity {
         //Pass Credentials to profile controller for authentication
 
 
-        //ProfileController.updateProfile(this.getApplicationContext(), this, interestStr, major, name, localStore.getCurrentAccount().getToken());
+        ProfileController.updateProfile(this.getApplicationContext(), this, interestStr, major, name, LocalStore.getCurrentAccount().getToken());
 
     }
 

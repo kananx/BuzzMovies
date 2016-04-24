@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * Sends the app to the RegiserActivity.
+     * Sends the app to the RegisterActivity.
      * @param email contents of email textfield
      * @param password contents of password textfield
      */

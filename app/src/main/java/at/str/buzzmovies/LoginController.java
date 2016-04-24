@@ -132,8 +132,8 @@ public class LoginController {
 
                             if (response.getString("accountType").equals("user")) {
                                 LocalStore.setCurrentAccount(new User(email, token, null));
-                                Intent toHomeActivity = new Intent(callee, HomeActivity.class);
-                                callee.startActivity(toHomeActivity);
+                                Intent toProfileActivity = new Intent(callee, ProfileActivity.class);
+                                callee.startActivity(toProfileActivity);
                             } else if (response.getString("accountType").equals("admin")) {
                                 LocalStore.setCurrentAccount(new Admin(email, token, null));
                                 Intent toAdminActivity = new Intent(callee, AdminActivity.class);

@@ -61,4 +61,8 @@
     <string name="title_activity_admin">Banned Accounts</string>
     <string name="api_get_accounts_route">/account</string>
 
+    <!-- String for Review Controller -->
+    <string name="api_review_route">/rating</string>
+    <string name="review_saved">Review saved</string>
+
 </resources>

@@ -33,16 +33,6 @@ public class ReviewActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-
-            }
-        });
-
         Intent intent = getIntent();
         String movieID = intent.getStringExtra(MovieScreen.MOVIE_ID);
         movie = LocalStore.getMovieByID(movieID);
@@ -82,12 +72,11 @@ public class ReviewActivity extends AppCompatActivity {
                 new RatingBar.OnRatingBarChangeListener() {
                     @Override
                     public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                        Toast.makeText(getApplicationContext(), "Your Selected Rating :" + String.valueOf(rating), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Your Selected Rating: " + String.valueOf(rating), Toast.LENGTH_SHORT).show();
                         currentReview.setRating(rating);
                     }
                 }
         );
-
 
     }
 

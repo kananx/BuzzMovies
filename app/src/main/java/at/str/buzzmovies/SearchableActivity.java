@@ -52,16 +52,6 @@ public class SearchableActivity extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(this);
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-
         handleIntent(getIntent());
 
         setContentView(R.layout.activity_search_results);
@@ -69,9 +59,6 @@ public class SearchableActivity extends AppCompatActivity {
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(this);
         mRecylerView.setLayoutManager(mLayoutManager);
-
-
-
     }
 
     /**

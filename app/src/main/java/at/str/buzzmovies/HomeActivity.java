@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 
 
 /**
@@ -19,12 +20,21 @@ import android.view.MenuItem;
  */
 public class HomeActivity extends AppCompatActivity {
 
+    protected Button mRecommendationButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         final Toolbar actionToolbar = (Toolbar) findViewById(R.id.action_toolbar);
         setSupportActionBar(actionToolbar);
+        mRecommendationButton = (Button) findViewById(R.id.recommendation_button);
+        mRecommendationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getRecommendation();
+            }
+        });
     }
 
     @Override
@@ -66,5 +76,9 @@ public class HomeActivity extends AppCompatActivity {
     private void profile() {
         final Intent toProfileActivity = new Intent(this, ProfileActivity.class);
         startActivity(toProfileActivity);
+    }
+
+    private void getRecommendation() {
+
     }
 }

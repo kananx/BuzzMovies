@@ -59,7 +59,14 @@
 
     <!-- Strings for Admin Page -->
     <string name="title_activity_admin">Banned Accounts</string>
+
+    <!-- Strings for Home Screen -->
+    <string name="recommendation_button">Get Recommendation</string>
+
+
     <string name="api_get_accounts_route">/account</string>
     <string name="api_get_majors_route">/majors</string>
+
+
 
 </resources>

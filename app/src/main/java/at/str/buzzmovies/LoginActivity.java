@@ -126,6 +126,7 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             //Pass Credentials to login controller for authentication
             LoginController.login(this.getApplicationContext(), this, email, password);
+            ProfileController.getMajorsList(this.getApplicationContext(), this);
         }
     }
 

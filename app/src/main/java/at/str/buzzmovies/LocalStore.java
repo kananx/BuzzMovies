@@ -24,6 +24,8 @@ public class LocalStore {
      */
     private static ArrayList<Account> accounts = new ArrayList<Account>();
 
+    private static ArrayList<String> majors = new ArrayList<String>();
+
 
     /**
      * Returns the current account
@@ -126,4 +128,14 @@ public class LocalStore {
     public static ArrayList<Account> getAccounts() {
         return accounts;
     }
+
+    public static ArrayList<String> getMajors() {
+        return majors;
+    }
+
+    public static void setMajors(ArrayList<String> majorsArray) {
+        majors = majorsArray;
+    }
+
+
 }

@@ -17,6 +17,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 
 /**
  * Controls activity that happens on Profile page of the App
@@ -69,7 +71,8 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
         confirmPass.setText("");
 
         majorSpinner = (Spinner) findViewById(R.id.major_spinner);
-        String[] majorChoices = new String[]{" ", "Computer Science", "Electrical Engineering", "Mechanical Engineering", "Computer Engineering"};
+        //String[] majorChoices = new String[]{" ", "Computer Science", "Electrical Engineering", "Mechanical Engineering", "Computer Engineering"};
+        ArrayList<String> majorChoices = LocalStore.getMajors();
         ArrayAdapter<String> majorAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, majorChoices);
         majorSpinner.setAdapter(majorAdapter);
 

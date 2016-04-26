@@ -10,10 +10,14 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,5 +80,41 @@ public class ProfileController {
                 }) {
         };
         VolleyQueue.getInstance(context).addToRequestQueue(profileRequest);
+    }
+
+
+    public static void getMajorsList(final Context context, final Activity callee) {
+        final String url = context.getString(R.string.api_base_url) + context.getString(R.string.api_get_majors_route);
+
+        final JsonArrayRequest majorsRequest = new JsonArrayRequest(Request.Method.GET,
+                url, null, new Response.Listener<JSONArray>() {
+
+            @Override
+            public void onResponse(JSONArray response) {
+                try {
+                    ArrayList<String> majorsArray = new ArrayList<String>();
+
+                    for (int i = 0; i < response.length(); i++) {
+                        final JSONObject majorsJSONArray = response.getJSONObject(i);
+                        final String major = majorsJSONArray.getString("major");
+                        majorsArray.add(major);
+                    }
+                    LocalStore.setMajors(majorsArray);
+                    Log.i("Testing Major Response", "Majors Populated");
+                } catch (JSONException e) {
+                    Log.w(context.getString(R.string.admin_tag), "MajorList Parse Fail");
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e("Testing Major Response", "Request Failed");
+            }
+        }) {
+
+        };
+
+        VolleyQueue.getInstance(context).addToRequestQueue(majorsRequest);
     }
 }

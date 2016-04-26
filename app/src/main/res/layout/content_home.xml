@@ -29,4 +29,13 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="51dp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/recommended_movie"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/recommendation_button" />
+
 </RelativeLayout>

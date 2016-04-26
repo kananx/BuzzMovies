@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class HomeController {
 
-    public static void getMovieByID(final String imdbID, final Context context, final Activity callee) {
+    public static Movie getMovieByID(final String imdbID, final Context context, final Activity callee) {
         String url = "http://www.omdbapi.com/?i=" + imdbID + "&plot=short&r=json";
         LocalStore.clearMovies();
 
@@ -35,14 +35,17 @@ public class HomeController {
                             for (int i = 0; i < resp.length(); i++) {
                                 movieTitle = resp.getString("Title");
                                 int year = Integer.parseInt(resp.getString("Year"));
-                                LocalStore.setCurrentRecommendedMovie(new Movie(movieTitle,"",year,"",imdbID));
+                                Movie movieToAdd = new Movie(movieTitle, "", year, "", imdbID);
+                                LocalStore.setCurrentRecommendedMovie(movieToAdd);
+                                LocalStore.addMovie(movieToAdd);
+                                ((HomeActivity) callee).updateRecommendationTextBox();
+
                             }
                             Log.i("Network", movieTitle);
 
                         } catch (Exception e) {
                             Log.e("Network", "Error Parsing JSON");
                         }
-
                     }
                 }, new Response.ErrorListener() {
 
@@ -54,11 +57,13 @@ public class HomeController {
                 });
 
         VolleyQueue.getInstance(context).addToRequestQueue(movieIDRequest);
+        Movie curMovie = LocalStore.getCurrentRecommendedMovie();
+        return curMovie;
 
 
     }
 
-    public static void getMovieRecommendation(final Context context, final Activity callee) {
+    public static Movie getMovieRecommendation(final Context context, final Activity callee) {
         String token = LocalStore.getCurrentAccount().getToken();
         final String url = context.getString(R.string.api_base_url) + "/recommendation?token=" + token;
 
@@ -91,6 +96,7 @@ public class HomeController {
         };
 
         VolleyQueue.getInstance(context).addToRequestQueue(recommendationRequest);
+        return LocalStore.getCurrentRecommendedMovie();
     }
 
 }

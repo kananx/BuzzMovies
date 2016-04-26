@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 /**
@@ -21,6 +22,7 @@ import android.widget.Button;
 public class HomeActivity extends AppCompatActivity {
 
     protected Button mRecommendationButton;
+    private TextView mRecommendationTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,15 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 getRecommendation();
+            }
+        });
+
+       mRecommendationTextView = (TextView) findViewById(R.id.recommended_movie);
+
+        mRecommendationTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToMovie();
             }
         });
     }
@@ -79,6 +90,17 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void getRecommendation() {
-        HomeController.getMovieRecommendation(this.getApplicationContext(), this);
+        Movie movie = HomeController.getMovieRecommendation(this.getApplicationContext(), this);
+    }
+
+    public void updateRecommendationTextBox() {
+        mRecommendationTextView.setText(LocalStore.getCurrentRecommendedMovie().getTitle());
+    }
+
+    private void goToMovie() {
+        Intent toReviewActivity = new Intent(this, ReviewActivity.class);
+        toReviewActivity.putExtra(MovieScreen.MOVIE_ID, LocalStore.getCurrentRecommendedMovie().getId());
+        startActivity(toReviewActivity);
     }
 }
+

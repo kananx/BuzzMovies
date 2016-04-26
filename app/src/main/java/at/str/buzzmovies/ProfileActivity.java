@@ -8,8 +8,10 @@ import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,6 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
     protected EditText interests;
     protected EditText changePass;
     protected EditText confirmPass;
+    protected Spinner majorSpinner;
 
     /**
      * onCreate method
@@ -50,16 +53,23 @@ public class ProfileActivity extends AppCompatActivity {
         String email = mEmail.getText().toString();
         nameText = (EditText) findViewById(R.id.name_editText);
         TextView majorPromp = (TextView) findViewById(R.id.major_TextView);
-        majorText = (EditText) findViewById(R.id.major_editText);
+
+        //majorText = (EditText) findViewById(R.id.major_editText);
         interests = (EditText) findViewById(R.id.interests_editText);
+
         changePass = (EditText) findViewById(R.id.changePass_editText);
         confirmPass = (EditText) findViewById(R.id.confirmPass_editText);
 
-        majorText.setText(user.getMajor());
+        //majorText.setText(user.getMajor());
         interests.setText(user.getInterest());
         nameText.setText(user.getName());
         changePass.setText("");
         confirmPass.setText("");
+
+        majorSpinner = (Spinner) findViewById(R.id.major_spinner);
+        String[] majorChoices = new String[]{"CS", "EE", "ME", "CompE"};
+        ArrayAdapter<String> majorAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, majorChoices);
+        majorSpinner.setAdapter(majorAdapter);
 
         Button mHomeButton = (Button) findViewById(R.id.home_button);
         mHomeButton.setOnClickListener(new View.OnClickListener() {
@@ -74,7 +84,7 @@ public class ProfileActivity extends AppCompatActivity {
                     //retrieving name, might use in user.java
                     name = nameText.getText().toString();
                     //retrieving major
-                    major = majorText.getText().toString();
+                    //major = majorText.getText().toString();
                     //retrieving interest
                     interestStr = interests.getText().toString();
                     changeInformation();

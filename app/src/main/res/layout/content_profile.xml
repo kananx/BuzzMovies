@@ -40,21 +40,13 @@
         android:layout_below="@+id/name_editText"
         android:layout_alignParentStart="true" />
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/major_editText"
-        android:layout_below="@+id/major_TextView"
-        android:layout_alignParentStart="true"
-        android:hint="Enter Major" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/interests"
         android:id="@+id/interest_TextView"
-        android:layout_below="@+id/major_editText"
+        android:layout_below="@+id/major_spinner"
         android:layout_alignParentStart="true" />
 
     <EditText
@@ -71,8 +63,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/changePass_profile_page"
         android:id="@+id/changePass_TextView"
-        android:layout_marginTop="24dp"
-        android:layout_below="@+id/home_button"
+        android:layout_above="@+id/changePass_editText"
         android:layout_alignParentStart="true" />
 
     <EditText
@@ -81,9 +72,8 @@
         android:id="@+id/changePass_editText"
         android:inputType="textPassword"
         android:hint="Enter New Password"
-        android:layout_below="@+id/home_button"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="64dp" />
+        android:layout_above="@+id/confirmPass_editText"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -91,7 +81,7 @@
         android:id="@+id/confirmPass_editText"
         android:inputType="textPassword"
         android:hint="Confirm New Password"
-        android:layout_below="@+id/changePass_editText"
+        android:layout_above="@+id/change_password_button"
         android:layout_alignParentStart="true" />
 
     <Button
@@ -99,14 +89,22 @@
         android:layout_height="wrap_content"
         android:text="@string/return_button"
         android:id="@+id/home_button"
-        android:layout_below="@+id/interests_editText"
-        android:layout_alignParentEnd="true" />
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/confirmPass_editText" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/change_password_button_text"
         android:id="@+id/change_password_button"
-        android:layout_below="@+id/confirmPass_editText"
-        android:layout_alignEnd="@+id/home_button" />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="52dp" />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/major_spinner"
+        android:layout_below="@+id/major_TextView"
+        android:layout_alignParentStart="true" />
 </RelativeLayout>

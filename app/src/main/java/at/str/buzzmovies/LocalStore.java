@@ -7,6 +7,8 @@ import java.util.ArrayList;
  */
 public class LocalStore {
 
+
+    private static Movie currentRecommendedMovie;
     /**
      * The list of reviews
      */
@@ -137,5 +139,12 @@ public class LocalStore {
         majors = majorsArray;
     }
 
+    public static void setCurrentRecommendedMovie(Movie recMovie) {
+        currentRecommendedMovie = recMovie;
+    }
+
+    public static Movie getCurrentRecommendedMovie() {
+        return currentRecommendedMovie;
+    }
 
 }

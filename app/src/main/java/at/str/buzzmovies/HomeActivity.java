@@ -79,6 +79,6 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void getRecommendation() {
-
+        HomeController.getMovieRecommendation(this.getApplicationContext(), this);
     }
 }

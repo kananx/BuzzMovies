@@ -45,7 +45,7 @@ public class ProfileController {
      * true if the user logged in successfully, false if the the username or password is incorrect
      */
     public static void updateProfile(final Context context, final Activity callee, final String interestStr, final String major, final String name, final String token) {
-        //TODO: Create api_updateProfile_route in the strings.xml file
+
         String url = context.getString(R.string.api_base_url) + context.getString(R.string.api_profile_route);
 
         Map<String, String> parameters = new HashMap<>();

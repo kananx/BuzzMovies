@@ -7,7 +7,9 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -20,7 +22,7 @@ import android.widget.Toast;
  * Controls activity that happens on Profile page of the App
  * @author Delicous 3.14
  */
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     protected User user;
     protected String name;
     protected String interestStr;
@@ -67,9 +69,11 @@ public class ProfileActivity extends AppCompatActivity {
         confirmPass.setText("");
 
         majorSpinner = (Spinner) findViewById(R.id.major_spinner);
-        String[] majorChoices = new String[]{"CS", "EE", "ME", "CompE"};
+        String[] majorChoices = new String[]{" ", "CS", "EE", "ME", "CompE"};
         ArrayAdapter<String> majorAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, majorChoices);
         majorSpinner.setAdapter(majorAdapter);
+
+        majorSpinner.setOnItemSelectedListener(this);
 
         Button mHomeButton = (Button) findViewById(R.id.home_button);
         mHomeButton.setOnClickListener(new View.OnClickListener() {
@@ -153,5 +157,16 @@ public class ProfileActivity extends AppCompatActivity {
     private void toHome() {
         Intent toHomeActivity = new Intent(this, HomeActivity.class);
         startActivity(toHomeActivity);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        major = (String) parent.getItemAtPosition(pos);
+        Log.d("Major String", major);
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+        // This isn't really important
     }
 }

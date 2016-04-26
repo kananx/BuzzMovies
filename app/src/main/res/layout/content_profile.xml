@@ -106,5 +106,5 @@
         android:layout_height="wrap_content"
         android:id="@+id/major_spinner"
         android:layout_below="@+id/major_TextView"
-        android:layout_alignParentStart="true" />
+        android:layout_toStartOf="@+id/change_password_button" />
 </RelativeLayout>

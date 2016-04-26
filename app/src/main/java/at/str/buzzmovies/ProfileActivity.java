@@ -69,9 +69,13 @@ public class ProfileActivity extends AppCompatActivity implements AdapterView.On
         confirmPass.setText("");
 
         majorSpinner = (Spinner) findViewById(R.id.major_spinner);
-        String[] majorChoices = new String[]{" ", "CS", "EE", "ME", "CompE"};
+        String[] majorChoices = new String[]{" ", "Computer Science", "Electrical Engineering", "Mechanical Engineering", "Computer Engineering"};
         ArrayAdapter<String> majorAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, majorChoices);
         majorSpinner.setAdapter(majorAdapter);
+
+        int pos = majorAdapter.getPosition(user.getMajor());
+        majorSpinner.setSelection(pos);
+
 
         majorSpinner.setOnItemSelectedListener(this);
 

@@ -62,4 +62,8 @@
     <string name="api_get_accounts_route">/account</string>
     <string name="api_get_majors_route">/majors</string>
 
+    <!-- String for Review Controller -->
+    <string name="api_review_route">/rating</string>
+    <string name="review_saved">Review saved</string>
+
 </resources>

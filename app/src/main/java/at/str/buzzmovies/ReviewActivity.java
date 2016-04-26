@@ -90,6 +90,9 @@ public class ReviewActivity extends AppCompatActivity {
         currentReview.setReviewer((User) LocalStore.getCurrentAccount());
         currentReview.setMovie(movie);
         LocalStore.addReview(currentReview);
+
+        ReviewController.saveReview(this.getApplicationContext(), this, (User) LocalStore.getCurrentAccount(), currentReview);
+
         Intent toMovieScreen = new Intent(this, HomeActivity.class);
         startActivity(toMovieScreen);
 

@@ -98,9 +98,9 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void goToMovie() {
-        Intent toReviewActivity = new Intent(this, ReviewActivity.class);
-        toReviewActivity.putExtra(MovieScreen.MOVIE_ID, LocalStore.getCurrentRecommendedMovie().getId());
-        startActivity(toReviewActivity);
+        Intent toMovieScreen = new Intent(this, MovieScreen.class);
+        toMovieScreen.putExtra(MovieScreen.MOVIE_ID, LocalStore.getCurrentRecommendedMovie().getId());
+        startActivity(toMovieScreen);
     }
 }
 

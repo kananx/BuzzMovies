@@ -35,6 +35,7 @@ public class HomeController {
                             for (int i = 0; i < resp.length(); i++) {
                                 movieTitle = resp.getString("Title");
                                 int year = Integer.parseInt(resp.getString("Year"));
+
                                 Movie movieToAdd = new Movie(movieTitle, "", year, "", imdbID);
                                 LocalStore.setCurrentRecommendedMovie(movieToAdd);
                                 LocalStore.addMovie(movieToAdd);
@@ -74,10 +75,7 @@ public class HomeController {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-                    String movieID = "";
-                    for (int i = 0; i < response.length(); i++) {
-                        movieID = response.getString("movie");
-                    }
+                    String movieID = response.getString("movie");
                     Log.i("Testing Rec Response", movieID);
                     getMovieByID(movieID, context, callee);
 

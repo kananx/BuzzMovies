@@ -36,7 +36,7 @@ public class MovieScreen extends AppCompatActivity {
 
         movieTitle.setText(currentMovie.getTitle());
         //movieGenre.setText(currentMovie.get);
-        movieDescr.setText(currentMovie.getPlot());
+        movieDescr.setText(((Integer)currentMovie.getYear()).toString());
 
         //implement viewList of reviews
 
